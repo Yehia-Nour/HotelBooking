@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E18E979A-14B3-43F0-857C-4C38D388EB3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.API", "src\HotelBooking.API\HotelBooking.API.csproj", "{263739B2-888C-4BC9-95EF-D7760ED27A66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Presentation", "src\HotelBooking.API\HotelBooking.Presentation.csproj", "{263739B2-888C-4BC9-95EF-D7760ED27A66}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Application", "src\HotelBooking.Application\HotelBooking.Application.csproj", "{3C290238-4922-F821-C028-23156687B204}"
 EndProject
