@@ -1,0 +1,30 @@
+[
+  {
+    "TypeName": "Standard",
+    "AccessibilityFeatures": "Wheelchair ramps, Grab bars in bathroom",
+    "Description": "Basic room with essential amenities",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "TypeName": "Deluxe",
+    "AccessibilityFeatures": "Wheelchair accessible, Elevator access",
+    "Description": "High-end room with luxurious amenities",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "TypeName": "Executive",
+    "AccessibilityFeatures": "Wide door frames, Accessible bathroom",
+    "Description": "Room for business travelers with a work area",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "TypeName": "Family",
+    "AccessibilityFeatures": "Child-friendly facilities, Safety features",
+    "Description": "Spacious room for families with children",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  }
+]

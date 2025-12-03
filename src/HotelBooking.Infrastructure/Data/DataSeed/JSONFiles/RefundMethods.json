@@ -1,0 +1,6 @@
+[
+  { "MethodName": "Cash" },
+  { "MethodName": "Credit Card" },
+  { "MethodName": "Online Transfer" },
+  { "MethodName": "Check" }
+]

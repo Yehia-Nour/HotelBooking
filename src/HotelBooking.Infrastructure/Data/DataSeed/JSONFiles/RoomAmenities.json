@@ -1,0 +1,50 @@
+[
+  {
+    "RoomTypeID": 1,
+    "AmenityID": 1
+  },
+  {
+    "RoomTypeID": 1,
+    "AmenityID": 4
+  },
+  {
+    "RoomTypeID": 2,
+    "AmenityID": 1
+  },
+  {
+    "RoomTypeID": 2,
+    "AmenityID": 2
+  },
+  {
+    "RoomTypeID": 2,
+    "AmenityID": 3
+  },
+  {
+    "RoomTypeID": 2,
+    "AmenityID": 4
+  },
+  {
+    "RoomTypeID": 3,
+    "AmenityID": 1
+  },
+  {
+    "RoomTypeID": 3,
+    "AmenityID": 4
+  },
+  {
+    "RoomTypeID": 4,
+    "AmenityID": 1
+  },
+  {
+    "RoomTypeID": 4,
+    "AmenityID": 2
+  },
+  {
+    "RoomTypeID": 4,
+    "AmenityID": 3
+  },
+  {
+    "RoomTypeID": 4,
+    "AmenityID": 4
+  }
+]

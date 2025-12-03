@@ -1,0 +1,26 @@
+[
+  {
+    "Name": "Wi-Fi",
+    "Description": "High-speed wireless internet access",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "Name": "Pool",
+    "Description": "Outdoor swimming pool with lifeguard",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "Name": "SPA",
+    "Description": "Full-service spa and wellness center",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "Name": "Fitness Center",
+    "Description": "Gym with modern equipment",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  }
+]

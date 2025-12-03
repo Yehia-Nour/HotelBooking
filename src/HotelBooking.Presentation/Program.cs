@@ -1,4 +1,7 @@
 
+using HotelBooking.Application.DependencyInjection;
+using HotelBooking.Infrastructure.DependencyInjection;
+
 namespace HotelBooking.API
 {
     public class Program
@@ -12,6 +15,13 @@ namespace HotelBooking.API
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+
+            builder.Services.AddApplicationServices();
+
+
 
             var app = builder.Build();
 

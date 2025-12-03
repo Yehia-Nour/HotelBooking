@@ -1,0 +1,52 @@
+[
+  {
+    "RoomNumber": "101",
+    "RoomTypeID": 1,
+    "Price": 100.00,
+    "BedType": "Queen",
+    "ViewType": "Sea",
+    "Status": "Available",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "RoomNumber": "102",
+    "RoomTypeID": 1,
+    "Price": 100.00,
+    "BedType": "Queen",
+    "ViewType": "City",
+    "Status": "Under Maintenance",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "RoomNumber": "201",
+    "RoomTypeID": 2,
+    "Price": 150.00,
+    "BedType": "King",
+    "ViewType": "Garden",
+    "Status": "Occupied",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "RoomNumber": "301",
+    "RoomTypeID": 3,
+    "Price": 200.00,
+    "BedType": "King",
+    "ViewType": "Sea",
+    "Status": "Available",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  },
+  {
+    "RoomNumber": "401",
+    "RoomTypeID": 4,
+    "Price": 250.00,
+    "BedType": "Twin",
+    "ViewType": "Pool",
+    "Status": "Occupied",
+    "CreatedBy": "System",
+    "ModifiedBy": "System"
+  }
+]

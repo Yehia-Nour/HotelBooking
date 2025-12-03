@@ -1,0 +1,26 @@
+[
+  {
+    "StateName": "Cairo",
+    "CountryID": 1
+  },
+  {
+    "StateName": "Giza",
+    "CountryID": 1
+  },
+  {
+    "StateName": "Riyadh",
+    "CountryID": 2
+  },
+  {
+    "StateName": "Jeddah",
+    "CountryID": 2
+  },
+  {
+    "StateName": "Dubai",
+    "CountryID": 3
+  },
+  {
+    "StateName": "Abu Dhabi",
+    "CountryID": 3
+  }
+]
