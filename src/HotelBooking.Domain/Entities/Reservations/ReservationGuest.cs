@@ -1,11 +1,10 @@
-﻿using HotelBooking.Domain.Entities.Guests;
+﻿using HotelBooking.Domain.Entities.Common;
+using HotelBooking.Domain.Entities.Guests;
 
 namespace HotelBooking.Domain.Entities.Reservations
 {
-    public class ReservationGuest
+    public class ReservationGuest : BaseEntity
     {
-        public int ReservationGuestID { get; set; }
-
         public int ReservationID { get; set; }
         public Reservation Reservation { get; set; } = default!;
 

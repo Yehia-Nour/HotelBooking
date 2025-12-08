@@ -1,15 +1,12 @@
-﻿namespace HotelBooking.Domain.Entities.Rooms
+﻿using HotelBooking.Domain.Entities.Common;
+
+namespace HotelBooking.Domain.Entities.Rooms
 {
-    public class Amenity
+    public class Amenity : AuditableEntity
     {
-        public int AmenityID { get; set; }
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
-        public bool IsActive { get; set; }
-        public string CreatedBy { get; set; } = default!;
-        public DateTime CreatedDate { get; set; }
-        public string ModifiedBy { get; set; } = default!;
-        public DateTime ModifiedDate { get; set; }
+        public bool IsActive { get; set; } = true;
 
         public ICollection<RoomAmenity> RoomAmenities { get; set; } = default!;
     }

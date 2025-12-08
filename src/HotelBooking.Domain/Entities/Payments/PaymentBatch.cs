@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelBooking.Domain.Entities.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Domain.Entities.Payments
 {
-    public class PaymentBatch
+    public class PaymentBatch : BaseEntity
     {
-        public int PaymentBatchID { get; set; }
         public DateTime PaymentDate { get; set; }
         public decimal TotalAmount { get; set; }
         public string PaymentMethod { get; set; } = default!;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelBooking.Domain.Entities.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Domain.Entities.Payments
 {
-    public class Refund
+    public class Refund : BaseEntity
     {
-        public int RefundID { get; set; }
         public decimal RefundAmount { get; set; }
         public string RefundReason { get; set; } = default!;
         public string RefundStatus { get; set; } = default!;

@@ -1,10 +1,10 @@
-﻿using HotelBooking.Domain.Entities.Reservations;
+﻿using HotelBooking.Domain.Entities.Common;
+using HotelBooking.Domain.Entities.Reservations;
 
 namespace HotelBooking.Domain.Entities.Payments
 {
-    public class Payment
+    public class Payment : BaseEntity
     {
-        public int PaymentID { get; set; }
         public decimal Amount { get; set; }
 
         public int ReservationID { get; set; }
