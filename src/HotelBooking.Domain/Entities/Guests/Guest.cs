@@ -1,4 +1,5 @@
-﻿using HotelBooking.Domain.Entities.Geography;
+﻿using HotelBooking.Domain.Entities.Common;
+using HotelBooking.Domain.Entities.Geography;
 using HotelBooking.Domain.Entities.Reservations;
 using System;
 using System.Collections.Generic;
@@ -8,19 +9,14 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Domain.Entities.Guests
 {
-    public class Guest
+    public class Guest : AuditableEntity
     {
-        public int GuestID { get; set; }
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Phone { get; set; } = default!;
         public AgeGroup AgeGroup { get; set; } = default!;
         public string Address { get; set; } = default!;
-        public string CreatedBy { get; set; } = default!;
-        public DateTime CreatedDate { get; set; }
-        public string ModifiedBy { get; set; } = default!;
-        public DateTime ModifiedDate { get; set; }
 
         public string UserID { get; set; } = default!;
 

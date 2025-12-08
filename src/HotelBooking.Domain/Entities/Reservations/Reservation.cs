@@ -1,11 +1,11 @@
-﻿using HotelBooking.Domain.Entities.Payments;
+﻿using HotelBooking.Domain.Entities.Common;
+using HotelBooking.Domain.Entities.Payments;
 using HotelBooking.Domain.Entities.Rooms;
 
 namespace HotelBooking.Domain.Entities.Reservations
 {
-    public class Reservation
+    public class Reservation : AuditableEntity
     {
-        public int ReservationID { get; set; } = default!;
         public DateTime BookingDate { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
@@ -19,6 +19,5 @@ namespace HotelBooking.Domain.Entities.Reservations
 
         public ICollection<ReservationGuest> ReservationGuests { get; set; } = default!;
         public ICollection<Payment> Payments { get; set; } = default!;
-        public ICollection<Cancellation> Cancellations { get; set; } = default!;
     }
 }
