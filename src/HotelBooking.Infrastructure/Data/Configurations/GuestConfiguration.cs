@@ -27,6 +27,11 @@ namespace HotelBooking.Infrastructure.Data.Configurations
             builder.Property(g => g.CreatedDate).HasDefaultValueSql("GETDATE()");
 
             builder.Property(g => g.ModifiedBy).HasMaxLength(100);
+
+            builder.HasOne(g => g.State)
+                   .WithMany()
+                   .HasForeignKey(g => g.StateID)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

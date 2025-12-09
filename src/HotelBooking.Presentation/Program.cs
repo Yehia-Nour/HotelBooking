@@ -1,12 +1,14 @@
 
 using HotelBooking.Application.DependencyInjection;
 using HotelBooking.Infrastructure.DependencyInjection;
+using HotelBooking.Presentation.Extensions;
+using System.Threading.Tasks;
 
 namespace HotelBooking.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,10 @@ namespace HotelBooking.API
 
 
             var app = builder.Build();
+
+
+            await app.MigrateDatabaseAsync();
+
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

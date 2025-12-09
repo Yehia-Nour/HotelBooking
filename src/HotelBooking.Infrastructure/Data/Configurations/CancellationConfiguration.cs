@@ -25,6 +25,7 @@ namespace HotelBooking.Infrastructure.Data.Configurations
             builder.HasOne(c => c.Reservation)
                 .WithOne()
                 .HasForeignKey<Cancellation>(c => c.ReservationID)
+                .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
         }
     }
