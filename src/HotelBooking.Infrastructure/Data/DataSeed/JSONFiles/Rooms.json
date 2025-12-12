@@ -15,7 +15,7 @@
     "Price": 100.00,
     "BedType": "Queen",
     "ViewType": "City",
-    "Status": "Under Maintenance",
+    "Status": "UnderMaintenance",
     "CreatedBy": "System",
     "ModifiedBy": "System"
   },

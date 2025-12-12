@@ -1,4 +1,6 @@
-﻿using HotelBooking.Infrastructure.Data.DbContexts;
+﻿using HotelBooking.Infrastructure.Data.DataSeed.Implementations;
+using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
+using HotelBooking.Infrastructure.Data.DbContexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +25,10 @@ namespace HotelBooking.Infrastructure.DependencyInjection
             services.AddIdentityCore<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<HotelBookingDbContext>();
+
+            services.AddScoped<IDataSeeder, DataSeeder>();
+            services.AddScoped<IJsonFileReader, JsonFileReader>();
+            services.AddKeyedScoped<IDataInitializer, DataInitializer>("Default");
 
             return services;
         }
