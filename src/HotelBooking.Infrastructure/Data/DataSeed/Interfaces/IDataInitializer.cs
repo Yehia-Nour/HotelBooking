@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Application.Contracts
+namespace HotelBooking.Infrastructure.Data.DataSeed.Interfaces
 {
-    internal interface ISeedService
+    public interface IDataInitializer
     {
+        Task InitializeAsync();
     }
 }

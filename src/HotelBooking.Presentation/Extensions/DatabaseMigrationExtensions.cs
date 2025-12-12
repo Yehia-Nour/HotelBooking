@@ -1,4 +1,5 @@
-﻿using HotelBooking.Infrastructure.Data.DbContexts;
+﻿using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
+using HotelBooking.Infrastructure.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelBooking.Presentation.Extensions
@@ -12,6 +13,14 @@ namespace HotelBooking.Presentation.Extensions
             var pendingMigrations = await dbContextService.Database.GetPendingMigrationsAsync();
             if (pendingMigrations.Any())
                 await dbContextService.Database.MigrateAsync();
+
+            return app;
+        }
+        public static async Task<WebApplication> SeedDatabaseAsync(this WebApplication app)
+        {
+            await using var scope = app.Services.CreateAsyncScope();
+            var DataInatializerService = scope.ServiceProvider.GetRequiredKeyedService<IDataInitializer>("Default");
+            await DataInatializerService.InitializeAsync();
 
             return app;
         }
