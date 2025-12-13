@@ -19,6 +19,7 @@
     <Folder Include="RepositoryInterfaces\" />
     <Folder Include="Services\Implementations\" />
     <Folder Include="Services\Interfaces\" />
+    <Folder Include="Specifications\" />
   </ItemGroup>
 
 </Project>
