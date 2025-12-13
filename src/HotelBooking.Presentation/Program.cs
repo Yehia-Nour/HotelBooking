@@ -1,6 +1,7 @@
 
 using HotelBooking.Application.DependencyInjection;
 using HotelBooking.Infrastructure.DependencyInjection;
+using HotelBooking.Presentation.CustomMiddlewares;
 using HotelBooking.Presentation.Extensions;
 using System.Threading.Tasks;
 
@@ -38,6 +39,8 @@ namespace HotelBooking.API
             {
                 app.MapOpenApi();
             }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseHttpsRedirection();
 
