@@ -1,13 +1,10 @@
-﻿using HotelBooking.Domain.Entities.Common;
+﻿using HotelBooking.Domain.Contracts;
+using HotelBooking.Domain.Entities.Common;
 using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
 {

@@ -1,15 +1,12 @@
-﻿using HotelBooking.Infrastructure.Data.DataSeed.Implementations;
+﻿using HotelBooking.Domain.Contracts;
+using HotelBooking.Infrastructure.Data.DataSeed.Implementations;
 using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HotelBooking.Infrastructure.DependencyInjection
 {
