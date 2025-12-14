@@ -2,10 +2,12 @@
 using HotelBooking.Infrastructure.Data.DataSeed.Implementations;
 using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
+using HotelBooking.Infrastructure.Data.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 
 namespace HotelBooking.Infrastructure.DependencyInjection
@@ -26,6 +28,10 @@ namespace HotelBooking.Infrastructure.DependencyInjection
             services.AddScoped<IDataSeeder, DataSeeder>();
             services.AddScoped<IJsonFileReader, JsonFileReader>();
             services.AddKeyedScoped<IDataInitializer, DataInitializer>("Default");
+
+            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+            services.AddScoped<IJwtService, JwtService>();
+            
 
             return services;
         }
