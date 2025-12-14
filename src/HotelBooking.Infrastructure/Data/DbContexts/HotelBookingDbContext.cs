@@ -3,6 +3,8 @@ using HotelBooking.Domain.Entities.Guests;
 using HotelBooking.Domain.Entities.Payments;
 using HotelBooking.Domain.Entities.Reservations;
 using HotelBooking.Domain.Entities.Rooms;
+using HotelBooking.Infrastructure.Data.Identity;
+using HotelBooking.Infrastructure.Data.Identity.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Infrastructure.Data.DbContexts
 {
-    public class HotelBookingDbContext : IdentityDbContext
+    public class HotelBookingDbContext : IdentityDbContext<ApplicationUser>
     {
         public HotelBookingDbContext(DbContextOptions<HotelBookingDbContext> options) : base(options) { }
 
@@ -39,5 +41,6 @@ namespace HotelBooking.Infrastructure.Data.DbContexts
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<RoomAmenity> RoomAmenities { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

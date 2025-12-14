@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using HotelBooking.Infrastructure.Data.Identity.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -9,20 +10,20 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Infrastructure.Data.Identity
+namespace HotelBooking.Infrastructure.Data.Identity.Security
 {
     internal class JwtService : IJwtService
     {
         private readonly JwtSettings _settings;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public JwtService(UserManager<IdentityUser> userManager, IOptions<JwtSettings> options)
+        public JwtService(UserManager<ApplicationUser> userManager, IOptions<JwtSettings> options)
         {
             _settings = options.Value;
             _userManager = userManager;
         }
 
-        public async Task<string> CreateTokenAsync(IdentityUser user)
+        public async Task<string> CreateTokenAsync(ApplicationUser user)
         {
             var claims = new List<Claim>
             {
