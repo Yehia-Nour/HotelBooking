@@ -1,8 +1,11 @@
-﻿using HotelBooking.Domain.Contracts;
+﻿using HotelBooking.Application.Services.Interfaces;
+using HotelBooking.Domain.Contracts;
 using HotelBooking.Infrastructure.Data.DataSeed.Implementations;
 using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
 using HotelBooking.Infrastructure.Data.Identity;
+using HotelBooking.Infrastructure.Data.Identity.Entities;
+using HotelBooking.Infrastructure.Data.Identity.Security;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +24,7 @@ namespace HotelBooking.Infrastructure.DependencyInjection
             services.AddDbContext<HotelBookingDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentityCore<IdentityUser>()
+            services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<HotelBookingDbContext>();
 
@@ -31,6 +34,7 @@ namespace HotelBooking.Infrastructure.DependencyInjection
 
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IRefreshTokenService, RefreshTokenService>();
             
 
             return services;

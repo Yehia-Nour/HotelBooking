@@ -1,4 +1,5 @@
-﻿using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
+﻿using HotelBooking.Domain.Contracts;
+using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
