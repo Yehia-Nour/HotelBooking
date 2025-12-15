@@ -25,5 +25,14 @@ namespace HotelBooking.Presentation.Extensions
 
             return app;
         }
+
+        public static async Task<WebApplication> SeedIdentityDatabaseAsync(this WebApplication app)
+        {
+            await using var scope = app.Services.CreateAsyncScope();
+            var dataInitializerService = scope.ServiceProvider.GetRequiredKeyedService<IDataInitializer>("Identity");
+            await dataInitializerService.InitializeAsync();
+
+            return app;
+        }
     }
 }

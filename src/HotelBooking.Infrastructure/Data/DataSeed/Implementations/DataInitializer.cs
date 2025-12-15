@@ -16,7 +16,10 @@ namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
         private readonly HotelBookingDbContext _dbContext;
         private readonly string _path = @"..\HotelBooking.Infrastructure\Data\DataSeed\JSONFiles\";
 
-        public DataInitializer(IDataSeeder dataSeeder, IJsonFileReader jsonFileReader,ILogger<DataInitializer> logger,HotelBookingDbContext dbContext)
+        public DataInitializer(IDataSeeder dataSeeder,
+            IJsonFileReader jsonFileReader,
+            ILogger<DataInitializer> logger,
+            HotelBookingDbContext dbContext)
         {
             _dataSeeder = dataSeeder;
             _jsonFileReader = jsonFileReader;
@@ -28,12 +31,12 @@ namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
         {
             try
             {
-                var hasAmenities = await _dbContext.Amenities.AnyAsync(); 
-                var hasCountries = await _dbContext.Countries.AnyAsync(); 
+                var hasAmenities = await _dbContext.Amenities.AnyAsync();
+                var hasCountries = await _dbContext.Countries.AnyAsync();
                 var hasRefundMethods = await _dbContext.RefundMethods.AnyAsync();
                 var hasRoomTypes = await _dbContext.RoomTypes.AnyAsync();
                 var hasRoomAmenities = await _dbContext.RoomAmenities.AnyAsync();
-                var  hasRooms = await _dbContext.Rooms.AnyAsync();
+                var hasRooms = await _dbContext.Rooms.AnyAsync();
                 var hasStates = await _dbContext.States.AnyAsync();
 
                 if (hasAmenities && hasCountries && hasRefundMethods && hasRoomTypes && hasRoomAmenities && hasRooms && hasStates) return;
@@ -89,6 +92,7 @@ namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
                 _logger.LogError($"Data Seeding Failed: {ex.Message}");
             }
         }
+
         private async Task SeedJsonFile<T>(string fileName, DbSet<T> dbSet) where T : BaseEntity
         {
             var filePath = Path.Combine(_path, fileName);
