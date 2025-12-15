@@ -29,9 +29,9 @@ namespace HotelBooking.API
             var app = builder.Build();
 
             #region Data Seeding
-
             await app.MigrateDatabaseAsync();
             await app.SeedDatabaseAsync(); 
+            await app.SeedIdentityDatabaseAsync();
             #endregion
 
             // Configure the HTTP request pipeline.
