@@ -1,14 +1,19 @@
 ﻿using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace HotelBooking.Presentation.DependencyInjection
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddPresentationServices(this IServiceCollection services)
+        public static IServiceCollection AddPresentationServices(this IServiceCollection services,
+            IConfiguration configuration)
         {
 
             services.AddControllers();
+            services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(c =>
             {
@@ -36,6 +41,24 @@ namespace HotelBooking.Presentation.DependencyInjection
                         new string[] {}
                     }
                 });
+            });
+
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options => {
+                options.SaveToken = true;
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = configuration["JwtSettings:Issuer"],
+                    ValidAudience = configuration["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]!))
+                };
             });
 
             services.AddFluentValidationAutoValidation();

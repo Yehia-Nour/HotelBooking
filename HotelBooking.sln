@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Domain", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Infrastructure", "src\HotelBooking.Infrastructure\HotelBooking.Infrastructure.csproj", "{D73E8EA0-3971-D440-674F-C88BFD02E7B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Presentation", "src\HotelBooking.Presentation\HotelBooking.Presentation.csproj", "{CF068B4F-2F0C-6966-03DC-678172078EFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBooking.Presentation", "src\HotelBooking.Presentation\HotelBooking.Presentation.csproj", "{A2335DEA-788E-5FE7-A46E-800F3A314DFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{D73E8EA0-3971-D440-674F-C88BFD02E7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D73E8EA0-3971-D440-674F-C88BFD02E7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D73E8EA0-3971-D440-674F-C88BFD02E7B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF068B4F-2F0C-6966-03DC-678172078EFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF068B4F-2F0C-6966-03DC-678172078EFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF068B4F-2F0C-6966-03DC-678172078EFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF068B4F-2F0C-6966-03DC-678172078EFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2335DEA-788E-5FE7-A46E-800F3A314DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2335DEA-788E-5FE7-A46E-800F3A314DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2335DEA-788E-5FE7-A46E-800F3A314DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2335DEA-788E-5FE7-A46E-800F3A314DFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,7 +45,7 @@ Global
 		{3C290238-4922-F821-C028-23156687B204} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{A47D832E-CFD4-405A-E8F9-8E255375B833} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{D73E8EA0-3971-D440-674F-C88BFD02E7B2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{CF068B4F-2F0C-6966-03DC-678172078EFC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A2335DEA-788E-5FE7-A46E-800F3A314DFC} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE217220-45C8-4A1E-A30E-6E34732817FC}

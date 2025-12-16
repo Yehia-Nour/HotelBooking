@@ -1,11 +1,11 @@
 ﻿using HotelBooking.Application.DTOs.UserDTOs;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Services.Interfaces;
-using HotelBooking.Infrastructure.Data.Identity.Entities;
-using HotelBooking.Infrastructure.Data.Identity.Security;
+using HotelBooking.Infrastructure.Identity.Entities;
+using HotelBooking.Infrastructure.Identity.Security;
 using Microsoft.AspNetCore.Identity;
 
-namespace HotelBooking.Infrastructure.Data.Identity
+namespace HotelBooking.Infrastructure.Identity
 {
     public class AuthenticationService : IAuthenticationService
     {
@@ -24,6 +24,10 @@ namespace HotelBooking.Infrastructure.Data.Identity
 
         public async Task<Result<TokenResponseDTO>> RegisterAsync(RegisterDTO registerDTO)
         {
+            var isEmailExists = await EmailExistsAsync(registerDTO.Email);
+            if (isEmailExists)
+                return Error.InvalidCrendentials("User.InvalidCrendentials", "Email Already Exists");
+
             var user = new ApplicationUser
             {
                 Email = registerDTO.Email,
@@ -33,9 +37,7 @@ namespace HotelBooking.Infrastructure.Data.Identity
 
             var identityResult = await _userManager.CreateAsync(user, registerDTO.Password);
             if (!identityResult.Succeeded)
-            {
                 return identityResult.Errors.Select(e => Error.Validation(e.Code, e.Description)).ToList();
-            }
 
             var accessToken = await _jwtService.GenerateTokenAsync(user);
             var refreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);

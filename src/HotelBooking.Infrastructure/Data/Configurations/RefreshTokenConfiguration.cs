@@ -1,4 +1,4 @@
-﻿using HotelBooking.Infrastructure.Data.Identity;
+﻿using HotelBooking.Infrastructure.Identity.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

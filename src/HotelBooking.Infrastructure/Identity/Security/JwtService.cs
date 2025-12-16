@@ -1,4 +1,4 @@
-﻿using HotelBooking.Infrastructure.Data.Identity.Entities;
+﻿using HotelBooking.Infrastructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Infrastructure.Data.Identity.Security
+namespace HotelBooking.Infrastructure.Identity.Security
 {
     internal class JwtService : IJwtService
     {

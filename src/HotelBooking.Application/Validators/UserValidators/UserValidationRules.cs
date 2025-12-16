@@ -30,16 +30,14 @@ namespace HotelBooking.Application.Validators.UserValidators
                     .WithMessage("Phone Number Must be Valid Egyptian Phone Number");
         }
 
-        public static IRuleBuilderOptions<T, string> EmailRule<T>(this IRuleBuilder<T, string> ruleBuilder, IAuthenticationService authService)
+        public static IRuleBuilderOptions<T, string> EmailRule<T>(this IRuleBuilder<T, string> ruleBuilder)
         {
             return ruleBuilder
                 .NotEmpty()
                     .WithMessage("Email is Required")
                 .EmailAddress()
                     .WithMessage("Invalid Email Format")
-                .Length(5, 100).WithMessage("Email Must be Between 5 and 100 Characters")
-                .MustAsync(async (email, ct) => !await authService.EmailExistsAsync(email))
-                    .WithMessage("Email already exists");
+                .Length(5, 100).WithMessage("Email Must be Between 5 and 100 Characters");
         }
 
         public static IRuleBuilderOptions<T, string> PasswordRule<T>(this IRuleBuilder<T, string> ruleBuilder)

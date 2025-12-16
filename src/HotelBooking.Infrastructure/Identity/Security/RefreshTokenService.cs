@@ -1,5 +1,6 @@
 ﻿using HotelBooking.Application.Services.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
+using HotelBooking.Infrastructure.Identity.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Infrastructure.Data.Identity.Security
+namespace HotelBooking.Infrastructure.Identity.Security
 {
     public class RefreshTokenService : IRefreshTokenService
     {
