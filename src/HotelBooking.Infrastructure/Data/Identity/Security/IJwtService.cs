@@ -10,6 +10,6 @@ namespace HotelBooking.Infrastructure.Data.Identity.Security
 {
     public interface IJwtService
     {
-        Task<string> CreateTokenAsync(ApplicationUser user);
+        Task<string> GenerateTokenAsync(ApplicationUser user);
     }
 }

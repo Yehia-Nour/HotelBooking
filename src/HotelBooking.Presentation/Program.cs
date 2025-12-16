@@ -2,6 +2,7 @@
 using HotelBooking.Application.DependencyInjection;
 using HotelBooking.Infrastructure.DependencyInjection;
 using HotelBooking.Presentation.CustomMiddlewares;
+using HotelBooking.Presentation.DependencyInjection;
 using HotelBooking.Presentation.Extensions;
 using System.Threading.Tasks;
 
@@ -13,17 +14,12 @@ namespace HotelBooking.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
 
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
+            builder.Services.AddPresentationServices();
 
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
             builder.Services.AddApplicationServices();
-
 
 
             var app = builder.Build();

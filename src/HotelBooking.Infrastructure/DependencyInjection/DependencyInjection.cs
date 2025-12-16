@@ -37,7 +37,8 @@ namespace HotelBooking.Infrastructure.DependencyInjection
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IRefreshTokenService, RefreshTokenService>();
-            
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IAdminService, AdminService>();
 
             return services;
         }

@@ -23,7 +23,7 @@ namespace HotelBooking.Infrastructure.Data.Identity.Security
             _userManager = userManager;
         }
 
-        public async Task<string> CreateTokenAsync(ApplicationUser user)
+        public async Task<string> GenerateTokenAsync(ApplicationUser user)
         {
             var claims = new List<Claim>
             {
