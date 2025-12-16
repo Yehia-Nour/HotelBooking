@@ -67,16 +67,16 @@ namespace HotelBooking.Infrastructure.Data.Identity
             };
         }
 
-        public async Task<Result<TokenResponseDTO>> RefreshTokenAsync(string userId, string refreshToken)
+        public async Task<Result<TokenResponseDTO>> RefreshTokenAsync(RefreshRequestDTO requestDTO)
         {
-            var isValid = await _refreshTokenService.ValidateRefreshTokenAsync(userId, refreshToken);
+            var isValid = await _refreshTokenService.ValidateRefreshTokenAsync(requestDTO.UserId, requestDTO.RefreshToken);
 
             if (!isValid)
                 return Error.InvalidCrendentials("User.InvalidCrendentials");
 
-            await _refreshTokenService.RevokeRefreshTokenAsync(refreshToken);
+            await _refreshTokenService.RevokeRefreshTokenAsync(requestDTO.RefreshToken);
 
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(requestDTO.UserId);
             if (user is null)
                 return Error.InvalidCrendentials("User.InvalidCrendentials");
 
