@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Infrastructure.Data.Identity.Entities
+namespace HotelBooking.Infrastructure.Identity.Entities
 {
     public class ApplicationUser : IdentityUser
     {

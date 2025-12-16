@@ -1,5 +1,5 @@
 ﻿using HotelBooking.Domain.Contracts;
-using HotelBooking.Infrastructure.Data.Identity.Entities;
+using HotelBooking.Infrastructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Client;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Infrastructure.Data.Identity.DataSeed
+namespace HotelBooking.Infrastructure.Identity.DataSeed
 {
     public class IdentityDataInitializer : IDataInitializer
     {

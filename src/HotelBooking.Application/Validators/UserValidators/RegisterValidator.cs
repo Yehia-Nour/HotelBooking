@@ -15,7 +15,7 @@ namespace HotelBooking.Application.Validators.UserValidators
         {
             RuleFor(ru => ru.Name).NameRule(); 
             RuleFor(ru => ru.Phone).PhoneRule();
-            RuleFor(ru => ru.Email).EmailRule(authService);
+            RuleFor(ru => ru.Email).EmailRule();
             RuleFor(ru => ru.Password).PasswordRule();
         }
     }

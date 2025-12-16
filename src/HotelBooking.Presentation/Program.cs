@@ -15,7 +15,7 @@ namespace HotelBooking.API
             var builder = WebApplication.CreateBuilder(args);
 
 
-            builder.Services.AddPresentationServices();
+            builder.Services.AddPresentationServices(builder.Configuration);
 
             builder.Services.AddInfrastructureServices(builder.Configuration);
 
@@ -24,24 +24,25 @@ namespace HotelBooking.API
 
             var app = builder.Build();
 
-            #region Data Seeding
             await app.MigrateDatabaseAsync();
             await app.SeedDatabaseAsync(); 
             await app.SeedIdentityDatabaseAsync();
-            #endregion
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
