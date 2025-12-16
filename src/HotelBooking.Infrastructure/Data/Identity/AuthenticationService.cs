@@ -1,0 +1,105 @@
+﻿using HotelBooking.Application.DTOs.UserDTOs;
+using HotelBooking.Application.Results;
+using HotelBooking.Application.Services.Interfaces;
+using HotelBooking.Infrastructure.Data.Identity.Entities;
+using HotelBooking.Infrastructure.Data.Identity.Security;
+using Microsoft.AspNetCore.Identity;
+
+namespace HotelBooking.Infrastructure.Data.Identity
+{
+    public class AuthenticationService : IAuthenticationService
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IRefreshTokenService _refreshTokenService;
+        private readonly IJwtService _jwtService;
+
+        public AuthenticationService(UserManager<ApplicationUser> userManager,
+            IRefreshTokenService refreshTokenService,
+            IJwtService jwtService)
+        {
+            _userManager = userManager;
+            _refreshTokenService = refreshTokenService;
+            _jwtService = jwtService;
+        }
+
+        public async Task<Result<TokenResponseDTO>> RegisterAsync(RegisterDTO registerDTO)
+        {
+            var user = new ApplicationUser
+            {
+                Email = registerDTO.Email,
+                UserName = registerDTO.Name,
+                PhoneNumber = registerDTO.Phone,
+            };
+
+            var identityResult = await _userManager.CreateAsync(user, registerDTO.Password);
+            if (!identityResult.Succeeded)
+            {
+                return identityResult.Errors.Select(e => Error.Validation(e.Code, e.Description)).ToList();
+            }
+
+            var accessToken = await _jwtService.GenerateTokenAsync(user);
+            var refreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);
+
+            return new TokenResponseDTO
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
+            };
+        }
+
+        public async Task<Result<TokenResponseDTO>> LoginAsync(LoginDTO loginDTO)
+        {
+            var user = await _userManager.FindByEmailAsync(loginDTO.Email);
+            if (user is null)
+                return Error.InvalidCrendentials("User.InvalidCrendentials");
+
+            var isPasswordValid = await _userManager.CheckPasswordAsync(user, loginDTO.Password);
+            if (!isPasswordValid)
+                return Error.InvalidCrendentials("User.InvalidCrendentials");
+
+            var accessToken = await _jwtService.GenerateTokenAsync(user);
+            var refreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);
+
+            return new TokenResponseDTO
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
+            };
+        }
+
+        public async Task<Result<TokenResponseDTO>> RefreshTokenAsync(string userId, string refreshToken)
+        {
+            var isValid = await _refreshTokenService.ValidateRefreshTokenAsync(userId, refreshToken);
+
+            if (!isValid)
+                return Error.InvalidCrendentials("User.InvalidCrendentials");
+
+            await _refreshTokenService.RevokeRefreshTokenAsync(refreshToken);
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user is null)
+                return Error.InvalidCrendentials("User.InvalidCrendentials");
+
+            var newAccessToken = await _jwtService.GenerateTokenAsync(user);
+            var newRefreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);
+
+            return new TokenResponseDTO
+            {
+                AccessToken = newAccessToken,
+                RefreshToken = newRefreshToken
+            };
+        }
+
+        public async Task<Result> LogoutAsync(string refreshToken)
+        {
+            await _refreshTokenService.RevokeRefreshTokenAsync(refreshToken);
+            return Result.Ok();
+        }
+
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user is not null;
+        }
+    }
+}
