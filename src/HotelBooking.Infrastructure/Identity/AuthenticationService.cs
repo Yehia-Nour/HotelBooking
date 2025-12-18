@@ -24,9 +24,6 @@ namespace HotelBooking.Infrastructure.Identity
 
         public async Task<Result<TokenResponseDTO>> RegisterAsync(RegisterDTO registerDTO)
         {
-            var isEmailExists = await EmailExistsAsync(registerDTO.Email);
-            if (isEmailExists)
-                return Error.InvalidCrendentials("User.InvalidCrendentials", "Email Already Exists");
 
             var user = new ApplicationUser
             {
@@ -38,6 +35,13 @@ namespace HotelBooking.Infrastructure.Identity
             var identityResult = await _userManager.CreateAsync(user, registerDTO.Password);
             if (!identityResult.Succeeded)
                 return identityResult.Errors.Select(e => Error.Validation(e.Code, e.Description)).ToList();
+
+            var roleResult = await _userManager.AddToRoleAsync(user, Role.Guest.ToString());
+            if (!roleResult.Succeeded)
+            {
+                await _userManager.DeleteAsync(user);
+                return Error.Failure("RoleAssignmentFailed", "User Created But Role Assignment Failed");
+            }
 
             var accessToken = await _jwtService.GenerateTokenAsync(user);
             var refreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);
@@ -95,6 +99,22 @@ namespace HotelBooking.Infrastructure.Identity
         public async Task<Result> LogoutAsync(string refreshToken)
         {
             await _refreshTokenService.RevokeRefreshTokenAsync(refreshToken);
+            return Result.Ok();
+        }
+
+        public async Task<Result> ChangePasswordAsync(string userEmail, ChangePasswordDTO passwordDTO)
+        {
+            if (passwordDTO.NewPassword != passwordDTO.ConfirmNewPassword)
+                return Result.Fail(Error.InvalidCrendentials("User.InvalidCrendentials", "New Password And Confirmation Password Do Not Mtch"));
+
+            var user = await _userManager.FindByEmailAsync(userEmail);
+            if (user is null)
+                return Result.Fail(Error.Unauthorized("User.Unauthorized"));
+
+            var result = await _userManager.ChangePasswordAsync(user, passwordDTO.CurrentPassword, passwordDTO.NewPassword);
+            if (!result.Succeeded)
+                return Result.Fail(result.Errors.Select(e => Error.Validation(e.Code, e.Description)).ToList());
+
             return Result.Ok();
         }
 
