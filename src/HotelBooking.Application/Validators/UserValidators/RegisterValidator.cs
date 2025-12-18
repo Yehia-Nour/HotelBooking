@@ -11,7 +11,7 @@ namespace HotelBooking.Application.Validators.UserValidators
 {
     public class RegisterValidator : AbstractValidator<RegisterDTO>
     {
-        public RegisterValidator(IAuthenticationService authService)
+        public RegisterValidator()
         {
             RuleFor(ru => ru.Name).NameRule(); 
             RuleFor(ru => ru.Phone).PhoneRule();

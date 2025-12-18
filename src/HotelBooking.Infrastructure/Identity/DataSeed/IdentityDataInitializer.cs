@@ -30,7 +30,11 @@ namespace HotelBooking.Infrastructure.Identity.DataSeed
             try
             {
                 if (!_roleManager.Roles.Any())
+                {
                     await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                    await _roleManager.CreateAsync(new IdentityRole("Manager"));
+                    await _roleManager.CreateAsync(new IdentityRole("Guest"));
+                }
 
                 if (!_userManager.Users.Any())
                 {
