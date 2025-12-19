@@ -37,7 +37,7 @@ namespace HotelBooking.Infrastructure.Identity.Security
             return token;
         }
 
-        public async Task<string?> ValidateRefreshTokenAsync(string token)
+        public async Task<string?> GetUserIdFromValidRefreshTokenAsync(string token)
         {
             var refreshToken = await _context.RefreshTokens
                 .FirstOrDefaultAsync(rt => rt.Token == token && !rt.IsRevoked);
@@ -48,7 +48,7 @@ namespace HotelBooking.Infrastructure.Identity.Security
             return refreshToken.UserId;
         }
 
-        public async Task GetUserIdFromValidRefreshTokenAsync(string token)
+        public async Task RevokeRefreshTokenAsync(string token)
         {
             var refreshToken = await _context.RefreshTokens
                 .FirstOrDefaultAsync(rt => rt.Token == token);
