@@ -8,7 +8,6 @@ namespace HotelBooking.Application.DTOs.UserDTOs
 {
     public class RefreshRequestDTO
     {
-        public string UserId { get; set; } = null!;
         public string RefreshToken { get; set; } = null!;
     }
 }

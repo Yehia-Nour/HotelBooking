@@ -29,7 +29,7 @@ namespace HotelBooking.Infrastructure.Identity
             {
                 Email = registerDTO.Email,
                 UserName = registerDTO.Name,
-                PhoneNumber = registerDTO.Phone,
+                PhoneNumber = registerDTO.Phone
             };
 
             var identityResult = await _userManager.CreateAsync(user, registerDTO.Password);
@@ -75,16 +75,16 @@ namespace HotelBooking.Infrastructure.Identity
 
         public async Task<Result<TokenResponseDTO>> RefreshTokenAsync(RefreshRequestDTO requestDTO)
         {
-            var isValid = await _refreshTokenService.ValidateRefreshTokenAsync(requestDTO.UserId, requestDTO.RefreshToken);
+            var userId = await _refreshTokenService.GetUserIdFromValidRefreshTokenAsync(requestDTO.RefreshToken);
 
-            if (!isValid)
+            if (userId is null)
+                return Error.InvalidCrendentials("User.InvalidCrendentials", "Refresh Token Is Invalid");
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user is null)
                 return Error.InvalidCrendentials("User.InvalidCrendentials");
 
             await _refreshTokenService.RevokeRefreshTokenAsync(requestDTO.RefreshToken);
-
-            var user = await _userManager.FindByIdAsync(requestDTO.UserId);
-            if (user is null)
-                return Error.InvalidCrendentials("User.InvalidCrendentials");
 
             var newAccessToken = await _jwtService.GenerateTokenAsync(user);
             var newRefreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);

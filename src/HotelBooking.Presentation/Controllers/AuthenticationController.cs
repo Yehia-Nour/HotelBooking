@@ -34,9 +34,9 @@ namespace HotelBooking.Presentation.Controllers
         public async Task<ActionResult<TokenResponseDTO>> Refresh(RefreshRequestDTO requestDTO)
         {
             var result = await _authenticationService.RefreshTokenAsync(requestDTO);
-
             return HandleResult(result);
         }
+
 
         [Authorize]
         [HttpPost("Logout")]
