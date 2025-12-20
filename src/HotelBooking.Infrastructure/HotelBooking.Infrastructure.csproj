@@ -17,8 +17,4 @@
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.11" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="RepositoryImplementations\" />
-  </ItemGroup>
-
 </Project>
