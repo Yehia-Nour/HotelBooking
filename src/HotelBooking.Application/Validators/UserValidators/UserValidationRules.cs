@@ -14,7 +14,7 @@ namespace HotelBooking.Application.Validators.UserValidators
         {
             return ruleBuilder
                 .NotEmpty()
-                    .WithMessage("Name is Required")
+                    .WithMessage(ValidationMessages.Required("Name"))
                 .Length(2, 50)
                     .WithMessage("Name Must be Between 2 and 50 Characters")
                 .Matches(@"^[a-zA-Z\s]+$")
@@ -25,7 +25,7 @@ namespace HotelBooking.Application.Validators.UserValidators
         {
             return ruleBuilder
                 .NotEmpty()
-                    .WithMessage("Phone is Required")
+                    .WithMessage(ValidationMessages.Required("Phone"))
                 .Matches(@"^(010|011|012|015)\d{8}$")
                     .WithMessage("Phone Number Must be Valid Egyptian Phone Number");
         }
@@ -34,7 +34,7 @@ namespace HotelBooking.Application.Validators.UserValidators
         {
             return ruleBuilder
                 .NotEmpty()
-                    .WithMessage("Email is Required")
+                    .WithMessage(ValidationMessages.Required("Email"))
                 .EmailAddress()
                     .WithMessage("Invalid Email Format")
                 .Length(5, 100).WithMessage("Email Must be Between 5 and 100 Characters");
@@ -44,7 +44,7 @@ namespace HotelBooking.Application.Validators.UserValidators
         {
             return ruleBuilder
                 .NotEmpty()
-                    .WithMessage("Password is Required")
+                    .WithMessage(ValidationMessages.Required("Password"))
                 .MinimumLength(8)
                     .WithMessage("Password Must be at least 8 Characters")
                 .Matches(@"[A-Z]+")
