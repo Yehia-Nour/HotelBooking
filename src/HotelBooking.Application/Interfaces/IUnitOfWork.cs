@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Domain.Contracts
+namespace HotelBooking.Application.Interfaces
 {
-    public interface IDataInitializer
+    public interface IUnitOfWork
     {
-        Task InitializeAsync();
     }
 }

@@ -1,4 +1,4 @@
-﻿using HotelBooking.Domain.Contracts;
+﻿using HotelBooking.Application.Interfaces;
 using HotelBooking.Domain.Entities.Common;
 using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
