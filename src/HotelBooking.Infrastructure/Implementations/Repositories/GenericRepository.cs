@@ -29,7 +29,7 @@ namespace HotelBooking.Infrastructure.Implementations.Repositories
 
         public async Task<TEntity?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
-        public async Task<TEntity?> GetByIdAsync(ICollection<IBaseSpecification<TEntity>> specifications)
+        public async Task<TEntity?> GetAsync(ICollection<IBaseSpecification<TEntity>> specifications)
                 => await SpecificationEvaluator.CreateQuery(_dbSet, specifications).FirstOrDefaultAsync();
 
         public async Task AddAsync(TEntity entity) => await _dbSet.AddAsync(entity);

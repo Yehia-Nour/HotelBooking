@@ -8,6 +8,6 @@ namespace HotelBooking.Application.DTOs.UserDTOs
 {
     public enum Role
     {
-        Guest, Manager
+        Guest = 1, Manager
     }
 }

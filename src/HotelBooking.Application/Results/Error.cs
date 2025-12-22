@@ -34,7 +34,7 @@ namespace HotelBooking.Application.Results
         public static Error Forbidden(string code = "General.Forbidden", string description = "You Do Not Have Permission")
             => new(code, description, ErrorType.Forbidden);
 
-        public static Error InvalidCrendentials(string code = "General.InvalidCredentials", string description = "The Provided Credentials Are Invalid")
+        public static Error InvalidCredentials(string code = "General.InvalidCredentials", string description = "The Provided Credentials Are Invalid")
             => new(code, description, ErrorType.InvalidCredentials);
     }
 }

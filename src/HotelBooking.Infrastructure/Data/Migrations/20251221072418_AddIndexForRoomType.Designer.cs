@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(HotelBookingDbContext))]
-    [Migration("20251214090717_AddRefreshTokenTable")]
-    partial class AddRefreshTokenTable
+    [Migration("20251221072418_AddIndexForRoomType")]
+    partial class AddIndexForRoomType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -619,10 +619,12 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TypeName");
+
                     b.ToTable("RoomTypes");
                 });
 
-            modelBuilder.Entity("HotelBooking.Infrastructure.Data.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("HotelBooking.Infrastructure.Identity.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -687,7 +689,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("HotelBooking.Infrastructure.Data.Identity.RefreshToken", b =>
+            modelBuilder.Entity("HotelBooking.Infrastructure.Identity.Entities.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1012,9 +1014,9 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Navigation("RoomType");
                 });
 
-            modelBuilder.Entity("HotelBooking.Infrastructure.Data.Identity.RefreshToken", b =>
+            modelBuilder.Entity("HotelBooking.Infrastructure.Identity.Entities.RefreshToken", b =>
                 {
-                    b.HasOne("HotelBooking.Infrastructure.Data.Identity.ApplicationUser", "User")
+                    b.HasOne("HotelBooking.Infrastructure.Identity.Entities.ApplicationUser", "User")
                         .WithMany("RefreshTokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1034,7 +1036,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("HotelBooking.Infrastructure.Data.Identity.ApplicationUser", null)
+                    b.HasOne("HotelBooking.Infrastructure.Identity.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1043,7 +1045,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("HotelBooking.Infrastructure.Data.Identity.ApplicationUser", null)
+                    b.HasOne("HotelBooking.Infrastructure.Identity.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1058,7 +1060,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelBooking.Infrastructure.Data.Identity.ApplicationUser", null)
+                    b.HasOne("HotelBooking.Infrastructure.Identity.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1067,7 +1069,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("HotelBooking.Infrastructure.Data.Identity.ApplicationUser", null)
+                    b.HasOne("HotelBooking.Infrastructure.Identity.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1113,7 +1115,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Navigation("Rooms");
                 });
 
-            modelBuilder.Entity("HotelBooking.Infrastructure.Data.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("HotelBooking.Infrastructure.Identity.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("RefreshTokens");
                 });

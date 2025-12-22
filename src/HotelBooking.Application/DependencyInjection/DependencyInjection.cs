@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using HotelBooking.Application.Services.Implementations;
+using HotelBooking.Application.Services.Interfaces;
 using HotelBooking.Application.Validators.UserValidators;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,10 +16,11 @@ namespace HotelBooking.Application.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            //services.AddAutoMapper(typeof(DependencyInjection).Assembly);
+            services.AddAutoMapper(typeof(DependencyInjection).Assembly);
 
             services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
 
+            services.AddScoped<IRoomTypeService, RoomTypeService>();
 
             return services;
         }
