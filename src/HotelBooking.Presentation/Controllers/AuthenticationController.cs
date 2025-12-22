@@ -40,9 +40,9 @@ namespace HotelBooking.Presentation.Controllers
 
         [Authorize]
         [HttpPost("Logout")]
-        public async Task<IActionResult> LogoutAsync(string refreshToken)
+        public async Task<IActionResult> LogoutAsync(RefreshRequestDTO requestDTO)
         {
-            var result = await _authenticationService.LogoutAsync(refreshToken);
+            var result = await _authenticationService.LogoutAsync(requestDTO);
 
             return HandleResult(result);
         }

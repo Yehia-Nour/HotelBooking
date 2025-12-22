@@ -13,7 +13,7 @@ namespace HotelBooking.Application.Interfaces.Repositories
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<IEnumerable<TEntity>> GetAllAsync(ICollection<IBaseSpecification<TEntity>> specifications);
         Task<TEntity?> GetByIdAsync(int id);
-        Task<TEntity?> GetByIdAsync(ICollection<IBaseSpecification<TEntity>> specifications);
+        Task<TEntity?> GetAsync(ICollection<IBaseSpecification<TEntity>> specifications);
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);

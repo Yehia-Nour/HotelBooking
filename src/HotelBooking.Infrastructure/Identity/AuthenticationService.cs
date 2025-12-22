@@ -57,11 +57,11 @@ namespace HotelBooking.Infrastructure.Identity
         {
             var user = await _userManager.FindByEmailAsync(loginDTO.Email);
             if (user is null)
-                return Error.InvalidCrendentials("User.InvalidCrendentials");
+                return Error.InvalidCredentials("User.InvalidCrendentials");
 
             var isPasswordValid = await _userManager.CheckPasswordAsync(user, loginDTO.Password);
             if (!isPasswordValid)
-                return Error.InvalidCrendentials("User.InvalidCrendentials");
+                return Error.InvalidCredentials("User.InvalidCrendentials");
 
             var accessToken = await _jwtService.GenerateTokenAsync(user);
             var refreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);
@@ -78,11 +78,11 @@ namespace HotelBooking.Infrastructure.Identity
             var userId = await _refreshTokenService.GetUserIdFromValidRefreshTokenAsync(requestDTO.RefreshToken);
 
             if (userId is null)
-                return Error.InvalidCrendentials("User.InvalidCrendentials", "Refresh Token Is Invalid");
+                return Error.InvalidCredentials("User.InvalidCrendentials", "Refresh Token Is Invalid");
 
             var user = await _userManager.FindByIdAsync(userId);
             if (user is null)
-                return Error.InvalidCrendentials("User.InvalidCrendentials");
+                return Error.InvalidCredentials("User.InvalidCrendentials");
 
             await _refreshTokenService.RevokeRefreshTokenAsync(requestDTO.RefreshToken);
 
@@ -96,16 +96,16 @@ namespace HotelBooking.Infrastructure.Identity
             };
         }
 
-        public async Task<Result> LogoutAsync(string refreshToken)
+        public async Task<Result> LogoutAsync(RefreshRequestDTO requestDTO)
         {
-            await _refreshTokenService.RevokeRefreshTokenAsync(refreshToken);
+            await _refreshTokenService.RevokeRefreshTokenAsync(requestDTO.RefreshToken);
             return Result.Ok();
         }
 
         public async Task<Result> ChangePasswordAsync(string userEmail, ChangePasswordDTO passwordDTO)
         {
             if (passwordDTO.NewPassword != passwordDTO.ConfirmNewPassword)
-                return Result.Fail(Error.InvalidCrendentials("User.InvalidCrendentials", "New Password And Confirmation Password Do Not Mtch"));
+                return Result.Fail(Error.InvalidCredentials("User.InvalidCrendentials", "New Password And Confirmation Password Do Not Mtch"));
 
             var user = await _userManager.FindByEmailAsync(userEmail);
             if (user is null)

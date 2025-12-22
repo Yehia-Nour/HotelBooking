@@ -13,7 +13,7 @@ namespace HotelBooking.Application.Services.Interfaces
         Task<Result<TokenResponseDTO>> RegisterAsync(RegisterDTO registerDTO);
         Task<Result<TokenResponseDTO>> LoginAsync(LoginDTO loginDTO);
         Task<Result<TokenResponseDTO>> RefreshTokenAsync(RefreshRequestDTO requestDTO);
-        Task<Result> LogoutAsync(string refreshToken);
+        Task<Result> LogoutAsync(RefreshRequestDTO requestDTO);
         Task<Result> ChangePasswordAsync(string userEmail, ChangePasswordDTO passwordDTO);
         Task<bool> EmailExistsAsync(string email);
     }
