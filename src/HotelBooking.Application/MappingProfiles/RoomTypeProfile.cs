@@ -14,8 +14,11 @@ namespace HotelBooking.Application.MappingProfiles
         public RoomTypeProfile()
         {
             CreateMap<RoomType, RoomTypeDTO>();
+
             CreateMap<CreateRoomTypeDTO, RoomType>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+
+            CreateMap<UpdateRoomTypeDTO, RoomType>();
         }
     }
 }
