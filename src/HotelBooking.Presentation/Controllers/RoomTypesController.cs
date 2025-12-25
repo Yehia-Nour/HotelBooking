@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace HotelBooking.Presentation.Controllers
 {
     [Authorize(Roles = "Admin,Manager")]
-    public class RoomTypeController : ApiBaseController
+    public class RoomTypesController : ApiBaseController
     {
         private readonly IRoomTypeService _roomTypeService;
 
-        public RoomTypeController(IRoomTypeService roomTypeService)
+        public RoomTypesController(IRoomTypeService roomTypeService)
         {
             _roomTypeService = roomTypeService;
         }

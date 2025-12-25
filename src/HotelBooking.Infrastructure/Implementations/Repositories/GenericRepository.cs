@@ -22,10 +22,10 @@ namespace HotelBooking.Infrastructure.Implementations.Repositories
             _dbSet = _context.Set<TEntity>();
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<TEntity>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
 
         public async Task<IEnumerable<TEntity>> GetAllAsync(ICollection<IBaseSpecification<TEntity>> specifications)
-                => await SpecificationEvaluator.CreateQuery(_dbSet, specifications).ToListAsync();
+                => await SpecificationEvaluator.CreateQuery(_dbSet, specifications).AsNoTracking().ToListAsync();
 
         public async Task<TEntity?> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
 
@@ -37,5 +37,8 @@ namespace HotelBooking.Infrastructure.Implementations.Repositories
         public void Update(TEntity entity) => _dbSet.Update(entity);
 
         public void Delete(TEntity entity) => _dbSet.Remove(entity);
+
+        public async Task<int> CountAsync(ICollection<IBaseSpecification<TEntity>> specifications)
+                => await SpecificationEvaluator.CreateQuery(_dbSet, specifications).CountAsync();
     }
 }

@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace HotelBooking.Presentation.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdminController : ApiBaseController
+    public class UsersController : ApiBaseController
     {
         private readonly IAdminService _adminService;
 
-        public AdminController(IAdminService adminService)
+        public UsersController(IAdminService adminService)
         {
             _adminService = adminService;
         }

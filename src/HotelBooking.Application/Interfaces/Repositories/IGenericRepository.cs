@@ -17,5 +17,6 @@ namespace HotelBooking.Application.Interfaces.Repositories
         Task AddAsync(TEntity entity);
         void Update(TEntity entity);
         void Delete(TEntity entity);
+        Task<int> CountAsync(ICollection<IBaseSpecification<TEntity>> specifications);
     }
 }
