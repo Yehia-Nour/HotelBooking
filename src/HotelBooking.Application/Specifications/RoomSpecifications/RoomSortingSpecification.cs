@@ -12,8 +12,8 @@ namespace HotelBooking.Application.Specifications.RoomSpecifications
 {
     internal class RoomSortingSpecification : ISortSpecification<Room>
     {
-        public Expression<Func<Room, object>> OrderBy { get; private set; }
-        public Expression<Func<Room, object>> OrderByDescending { get; private set; }
+        public Expression<Func<Room, object>> OrderBy { get; private set; } = null!;
+        public Expression<Func<Room, object>> OrderByDescending { get; private set; } = null!;
 
         private RoomSortingSpecification() { }
 

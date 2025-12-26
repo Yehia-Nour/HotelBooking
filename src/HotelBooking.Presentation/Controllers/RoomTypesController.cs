@@ -1,26 +1,27 @@
 ﻿using HotelBooking.Application.DTOs.RoomTypeDTOs;
+using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
+using HotelBooking.Application.Features.RoomTypes.Queries.Requests;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Services.Interfaces;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace HotelBooking.Presentation.Controllers
 {
     [Authorize(Roles = "Admin,Manager")]
     public class RoomTypesController : ApiBaseController
     {
-        private readonly IRoomTypeService _roomTypeService;
+        private readonly IMediator _mediator;
 
-        public RoomTypesController(IRoomTypeService roomTypeService)
-        {
-            _roomTypeService = roomTypeService;
-        }
+        public RoomTypesController(IMediator mediator) { _mediator = mediator; }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RoomTypeDTO>>> GetAllRoomTypes(bool? IsActive)
+        public async Task<ActionResult<IEnumerable<RoomTypeDTO>>> GetAllRoomTypes(bool? isActive)
         {
-            var result = await _roomTypeService.GetAllRoomTypesAsync(IsActive);
+            var result = await _mediator.Send(new GetAllRoomTypesQuery(isActive));
 
             return HandleResult(result);
         }
@@ -28,25 +29,27 @@ namespace HotelBooking.Presentation.Controllers
         [HttpGet("{roomTypeId}")]
         public async Task<ActionResult<RoomTypeDTO>> GetRoomTypeById(int roomTypeId)
         {
-            var result = await _roomTypeService.GetRoomTypeByIdAsync(roomTypeId);
+            var result = await _mediator.Send(new GetRoomTypeByIdQuery(roomTypeId));
 
             return HandleResult(result);
         }
 
         [HttpPost]
-        public async Task<ActionResult<RoomTypeDTO>> CreateRoomType(CreateRoomTypeDTO roomTypeDTO)
+        public async Task<ActionResult<int>> CreateRoomType(CreateRoomTypeCommand command)
         {
-            var userEmail = GetEmailFromToken();
-            var result = await _roomTypeService.CreateRoomTypeAsync(userEmail, roomTypeDTO);
+            var wrapper = new CreateRoomTypeWithUserCommand(command, GetEmailFromToken());
+
+            var result = await _mediator.Send(wrapper);
 
             return HandleResult(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateRoomType(UpdateRoomTypeDTO roomTypeDTO)
+        public async Task<IActionResult> UpdateRoomType(UpdateRoomTypeCommand command)
         {
-            var userEmail = GetEmailFromToken();
-            var result = await _roomTypeService.UpdateRoomTypeAsync(userEmail, roomTypeDTO);
+            var wrapper = new UpdateRoomTypeWithUserCommand(command, GetEmailFromToken());
+
+            var result = await _mediator.Send(wrapper);
 
             return HandleResult(result);
         }
@@ -54,7 +57,7 @@ namespace HotelBooking.Presentation.Controllers
         [HttpDelete("{roomTypeId}")]
         public async Task<IActionResult> DeleteRoomType(int roomTypeId)
         {
-            var result = await _roomTypeService.DeleteRoomTypeAsync(roomTypeId);
+            var result = await _mediator.Send(new DeleteRoomTypeCommand(roomTypeId));
 
             return HandleResult(result);
         }
@@ -62,10 +65,9 @@ namespace HotelBooking.Presentation.Controllers
         [HttpPut("{roomTypeId}")]
         public async Task<IActionResult> ToggleRoomType(int roomTypeId)
         {
-            var result = await _roomTypeService.ToggleRoomTypeActiveAsync(roomTypeId);
+            var result = await _mediator.Send(new ToggleRoomTypeActiveCommand(roomTypeId));
 
             return HandleResult(result);
         }
-
     }
 }

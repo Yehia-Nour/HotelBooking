@@ -20,7 +20,7 @@ namespace HotelBooking.Application.DependencyInjection
 
             services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
 
-            services.AddScoped<IRoomTypeService, RoomTypeService>();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
             return services;
         }
