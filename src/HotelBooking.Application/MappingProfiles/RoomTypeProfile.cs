@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HotelBooking.Application.DTOs.RoomTypeDTOs;
+using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
 using HotelBooking.Domain.Entities.Rooms;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,11 @@ namespace HotelBooking.Application.MappingProfiles
         {
             CreateMap<RoomType, RoomTypeDTO>();
 
-            CreateMap<CreateRoomTypeDTO, RoomType>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<CreateRoomTypeCommand, RoomType>();
 
-            CreateMap<UpdateRoomTypeDTO, RoomType>();
+            CreateMap<UpdateRoomTypeCommand, RoomType>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedDate, opt => opt.MapFrom(src => DateTime.Now));
         }
     }
 }

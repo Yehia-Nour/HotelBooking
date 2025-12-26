@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace HotelBooking.Application.DTOs.RoomTypeDTOs
 {
-    public class RoomTypeDTO
+    public record RoomTypeDTO
     {
-        public int Id { get; set; }
-        public string TypeName { get; set; } = default!;
-        public string AccessibilityFeatures { get; set; } = default!;
-        public string Description { get; set; } = default!;
-        public bool IsActive { get; set; }
+        public int Id { get; init; }
+        public string TypeName { get; init; } = default!;
+        public string AccessibilityFeatures { get; init; } = default!;
+        public string Description { get; init; } = default!;
+        public bool IsActive { get; init; }
     }
+
 }

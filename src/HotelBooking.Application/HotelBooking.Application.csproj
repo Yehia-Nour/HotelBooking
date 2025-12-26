@@ -9,11 +9,18 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HotelBooking.Domain\HotelBooking.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Rooms\Commands\Handlers\" />
+    <Folder Include="Features\Rooms\Commands\Requests\" />
+    <Folder Include="Features\Rooms\Commands\Validators\" />
   </ItemGroup>
 
 </Project>
