@@ -33,7 +33,7 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
             var spec = RoomTypeByNameSpecification.ForName(request.Command.TypeName);
             var existingRoomType = await repo.GetAsync(new List<IBaseSpecification<RoomType>> { spec });
             if (existingRoomType is not null)
-                return Error.Failure("RoomType.Failure", description: $"A room type with this name {request.Command.TypeName} already exists.");
+                return Error.Failure("RoomType.Failure", description: $"A room type with this name {request.Command.TypeName} already exists");
 
             var newRoomType = _mapper.Map<RoomType>(request.Command);
             newRoomType.CreatedBy = request.UserEmail;

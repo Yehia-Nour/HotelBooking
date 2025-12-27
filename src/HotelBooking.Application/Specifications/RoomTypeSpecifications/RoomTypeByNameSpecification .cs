@@ -12,14 +12,9 @@ namespace HotelBooking.Application.Specifications.RoomTypeSpecifications
     internal class RoomTypeByNameSpecification : ICriteriaSpecification<RoomType>
     {
         public Expression<Func<RoomType, bool>> Criteria { get; }
-        private RoomTypeByNameSpecification(Expression<Func<RoomType, bool>> criteria)
-        {
-            Criteria = criteria;
-        }
 
-        public static RoomTypeByNameSpecification ForName(string name)
-        {
-            return new RoomTypeByNameSpecification(r => r.TypeName == name);
-        }
+        private RoomTypeByNameSpecification(Expression<Func<RoomType, bool>> criteria) { Criteria = criteria; }
+
+        public static RoomTypeByNameSpecification ForName(string name) => new(r => r.TypeName == name);
     }
 }
