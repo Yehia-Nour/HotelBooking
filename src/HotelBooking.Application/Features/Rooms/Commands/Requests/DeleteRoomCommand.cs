@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelBooking.Application.Features.RoomTypes.Commands.Requests
+namespace HotelBooking.Application.Features.Rooms.Commands.Requests
 {
-    public record ToggleRoomTypeActiveCommand(int RoomTypeId) : IRequest<Result>;
+    public record DeleteRoomCommand(int RoomId) : IRequest<Result>;
 }

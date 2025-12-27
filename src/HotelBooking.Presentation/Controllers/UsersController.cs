@@ -10,10 +10,7 @@ namespace HotelBooking.Presentation.Controllers
     {
         private readonly IAdminService _adminService;
 
-        public UsersController(IAdminService adminService)
-        {
-            _adminService = adminService;
-        }
+        public UsersController(IAdminService adminService) { _adminService = adminService; }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()

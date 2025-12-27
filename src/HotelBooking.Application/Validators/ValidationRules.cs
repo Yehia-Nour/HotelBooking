@@ -37,9 +37,7 @@ namespace HotelBooking.Application.Validators
 
         public static IRuleBuilderOptions<T, int> RequiredNumberField<T>(this IRuleBuilder<T, int> ruleBuilder, string fieldName)
         {
-            return ruleBuilder
-                .GreaterThan(0)
-                    .WithMessage($"{fieldName} must be greater than 0");
+            return ruleBuilder.InclusiveBetween(1, int.MaxValue).WithMessage($"{fieldName} must be between 1 and {int.MaxValue}");
         }
 
         public static IRuleBuilderOptions<T, string> EmailField<T>(this IRuleBuilder<T, string> ruleBuilder, string fieldName)
@@ -60,6 +58,21 @@ namespace HotelBooking.Application.Validators
                 .Matches(@"[a-z]+").WithMessage($"{fieldName} must contain at least one lowercase letter")
                 .Matches(@"\d+").WithMessage($"{fieldName} must contain at least one number")
                 .Matches(@"[\!\@\#\$\%\^\&\*\(\)\-\+\=]+").WithMessage($"{fieldName} must contain at least one special character (!@#$%^&*()-+=)");
+        }
+
+        public static IRuleBuilderOptions<T, string> NumbersOnlyField<T>(this IRuleBuilder<T, string> ruleBuilder, string fieldName)
+        {
+            return ruleBuilder.Matches(@"^\d+$").WithMessage($"{fieldName} can contain only numbers");
+        }
+
+        public static IRuleBuilderOptions<T, decimal> PriceField<T>(this IRuleBuilder<T, decimal> ruleBuilder, string fieldName)
+        {
+            return ruleBuilder.InclusiveBetween(0.01m, 999999.99m).WithMessage($"{fieldName} must be between 0.01 and 999999.99");
+        }
+
+        public static IRuleBuilderOptions<T, TEnum> EnumField<T, TEnum>(this IRuleBuilder<T, TEnum> ruleBuilder, string fieldName) where TEnum : struct, Enum
+        {
+            return ruleBuilder.IsInEnum().WithMessage($"{fieldName} has an invalid value");
         }
     }
 }

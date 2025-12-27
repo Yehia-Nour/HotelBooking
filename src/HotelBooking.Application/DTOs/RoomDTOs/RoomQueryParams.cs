@@ -11,7 +11,7 @@ namespace HotelBooking.Application.DTOs.RoomDTOs
         public int? RoomTypeId {  get; set; }
         public string? SearchByRoomNumber { get; set; }
         public RoomStatus? Status { get; set; }
-        public RoomSortingOption sortingOption { get; set; }
+        public RoomSortingOption SortingOption { get; set; }
 
         private int _pageIndex = 1;
         public int PageIndex

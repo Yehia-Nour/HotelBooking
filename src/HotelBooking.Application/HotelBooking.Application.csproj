@@ -18,9 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Rooms\Commands\Handlers\" />
-    <Folder Include="Features\Rooms\Commands\Requests\" />
-    <Folder Include="Features\Rooms\Commands\Validators\" />
+    <Folder Include="Services\Implementations\" />
   </ItemGroup>
 
 </Project>

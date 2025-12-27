@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using HotelBooking.Application.Services.Implementations;
 using HotelBooking.Application.Services.Interfaces;
 using HotelBooking.Application.Validators.UserValidators;
 using Microsoft.Extensions.DependencyInjection;

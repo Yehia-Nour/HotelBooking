@@ -36,8 +36,8 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
 
             var spec = RoomTypeByNameSpecification.ForName(request.Command.TypeName);
             var existingRoomType = await repo.GetAsync(new List<IBaseSpecification<RoomType>> { spec });
-            if (existingRoomType is not null)
-                return Result.Fail(Error.Failure("RoomType.Failure", description: $"A room type with this name {request.Command.TypeName} already exists."));
+            if (existingRoomType is not null && existingRoomType.TypeName != roomType.TypeName)
+                return Result.Fail(Error.Failure("RoomType.Failure", description: $"A room type with this name {request.Command.TypeName} already exists"));
 
             _mapper.Map(request.Command, roomType);
             roomType.ModifiedBy = request.UserEmail;
