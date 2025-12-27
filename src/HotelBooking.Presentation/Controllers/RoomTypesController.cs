@@ -1,13 +1,9 @@
 ﻿using HotelBooking.Application.DTOs.RoomTypeDTOs;
 using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
 using HotelBooking.Application.Features.RoomTypes.Queries.Requests;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace HotelBooking.Presentation.Controllers
 {

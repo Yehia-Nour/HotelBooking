@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace HotelBooking.Presentation.DependencyInjection
 {
@@ -11,12 +12,13 @@ namespace HotelBooking.Presentation.DependencyInjection
         public static IServiceCollection AddPresentationServices(this IServiceCollection services,
             IConfiguration configuration)
         {
-
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(c =>
             {
+                c.CustomSchemaIds(type => type.FullName);
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",

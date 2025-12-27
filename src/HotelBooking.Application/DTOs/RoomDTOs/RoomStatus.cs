@@ -8,7 +8,7 @@ namespace HotelBooking.Application.DTOs.RoomDTOs
 {
     public enum RoomStatus
     {
-        Available = 1,
+        Available,
         UnderMaintenance,
         Occupied
     }
