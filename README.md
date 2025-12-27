@@ -50,7 +50,7 @@ This module handles **all administrative tasks for managing users and roles**, e
 - **Assign Role to User:**  
   Admins can assign a new role to users. Existing roles are removed before assigning a new one. Admins cannot have their roles changed.
 
-
+---
 ### 🛏 Room Type Management Module
 
 This module handles **all operations related to hotel room types**, enabling administrators and managers to manage room categories efficiently. Access is restricted to users with the **Admin** or **Manager** roles.
@@ -76,3 +76,27 @@ This module handles **all operations related to hotel room types**, enabling adm
 - **Toggle Active Status:**  
   Activate or deactivate a room type. Deactivation is only allowed if the room type has no associated rooms, ensuring consistency in hotel operations.
 
+---
+### 🛏 Room Management Module
+
+This module handles **all operations related to hotel rooms**, enabling administrators and managers to manage rooms efficiently. Access is restricted to users with the **Admin** or **Manager** roles.
+
+**Features:**
+
+- **Retrieve All Rooms:**  
+  List all rooms with optional filtering by room type, room status, or search by room number.
+
+- **Get Room by ID:**  
+  Fetch detailed information about a specific room using its unique ID.
+
+- **Create Room:**  
+  Admins and managers can create a new room by providing its room number, room type, price, and status (active or inactive). The system ensures that duplicate room numbers cannot be created.
+
+- **Update Room:**  
+  Modify details of an existing room. The module prevents updating a room to a number that already exists.
+
+- **Delete Room:**  
+  Remove a room from the system, but only if no reservations are currently associated with it. This ensures that active reservations and room assignments are not broken.
+
+- **Toggle Active Status:**  
+  Activate or deactivate a room. Deactivation is only allowed if the room has no associated reservations, ensuring consistency in hotel operations.
