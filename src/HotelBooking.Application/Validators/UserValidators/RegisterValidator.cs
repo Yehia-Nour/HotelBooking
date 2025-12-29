@@ -1,11 +1,5 @@
 ﻿using FluentValidation;
 using HotelBooking.Application.DTOs.UserDTOs;
-using HotelBooking.Application.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Application.Validators.UserValidators
 {

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HotelBooking.Application.DTOs.RoomTypeDTOs;
 using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
@@ -7,11 +6,6 @@ using HotelBooking.Application.Specifications.RoomTypeSpecifications;
 using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
 {

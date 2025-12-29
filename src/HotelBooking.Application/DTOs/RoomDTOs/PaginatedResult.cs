@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelBooking.Application.DTOs.RoomDTOs
+﻿namespace HotelBooking.Application.DTOs.RoomDTOs
 {
     public class PaginatedResult<TEntity>
     {

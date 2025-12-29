@@ -5,11 +5,6 @@ using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Application.Features.RoomTypes.Queries.Handlers
 {
@@ -26,10 +21,9 @@ namespace HotelBooking.Application.Features.RoomTypes.Queries.Handlers
 
         public async Task<Result<RoomTypeDTO>> Handle(GetRoomTypeByIdQuery request, CancellationToken cancellationToken)
         {
-            var roomType = await _unitOfWork.GetRepository<RoomType>().GetByIdAsync(request.Id);
-
+            var roomType = await _unitOfWork.GetRepository<RoomType>().GetByIdAsync(request.RoomTypeId);
             if (roomType is null)
-                return Error.NotFound("RoomType.NotFound", $"RoomType with id {request.Id} not found");
+                return Error.NotFound("RoomType.NotFound", $"RoomType with id {request.RoomTypeId} not found");
 
             return _mapper.Map<RoomTypeDTO>(roomType);
         }

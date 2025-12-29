@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelBooking.Application.DTOs.RoomDTOs
+﻿namespace HotelBooking.Application.DTOs.RoomDTOs
 {
-    public class RoomDTO
+    public record RoomDTO
     {
-        public int Id { get; set; }
-        public string RoomNumber { get; set; } = default!;
-        public int RoomTypeID { get; set; }
-        public decimal Price { get; set; }
-        public string BedType { get; set; } = default!;
-        public string ViewType { get; set; } = default!;
-        public string Status { get; set; } = default!;
-        public bool IsActive { get; set; }
+        public int Id { get; init; }
+        public string RoomNumber { get; init; } = default!;
+        public int RoomTypeID { get; init; }
+        public decimal Price { get; init; }
+        public string BedType { get; init; } = default!;
+        public string ViewType { get; init; } = default!;
+        public string Status { get; init; } = default!;
+        public bool IsActive { get; init; }
     }
 }

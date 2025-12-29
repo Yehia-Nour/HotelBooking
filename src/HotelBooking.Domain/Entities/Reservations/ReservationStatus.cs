@@ -1,6 +1,4 @@
-﻿using System.Runtime.Serialization;
-
-namespace HotelBooking.Domain.Entities.Reservations
+﻿namespace HotelBooking.Domain.Entities.Reservations
 {
     public enum ReservationStatus
     {

@@ -1,10 +1,5 @@
 ﻿using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Application.Interfaces.Repositories
 {
@@ -15,6 +10,7 @@ namespace HotelBooking.Application.Interfaces.Repositories
         Task<TEntity?> GetByIdAsync(int id);
         Task<TEntity?> GetAsync(ICollection<IBaseSpecification<TEntity>> specifications);
         Task AddAsync(TEntity entity);
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
         void Update(TEntity entity);
         void Delete(TEntity entity);
         Task<int> CountAsync(ICollection<IBaseSpecification<TEntity>> specifications);

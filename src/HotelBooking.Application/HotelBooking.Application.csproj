@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\NewFolder\**" />
+    <EmbeddedResource Remove="Features\NewFolder\**" />
+    <None Remove="Features\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <PackageReference Include="MediatR" Version="14.0.0" />
@@ -18,6 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\NewFolder - Copy\Commands\Handlers\" />
+    <Folder Include="Features\NewFolder - Copy\Commands\Requests\" />
+    <Folder Include="Features\NewFolder - Copy\Commands\Validators\" />
+    <Folder Include="Features\NewFolder - Copy\Queries\Handlers\" />
+    <Folder Include="Features\NewFolder - Copy\Queries\Requests\" />
     <Folder Include="Services\Implementations\" />
   </ItemGroup>
 

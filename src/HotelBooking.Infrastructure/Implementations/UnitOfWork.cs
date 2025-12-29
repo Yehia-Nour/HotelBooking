@@ -3,12 +3,6 @@ using HotelBooking.Application.Interfaces.Repositories;
 using HotelBooking.Domain.Entities.Common;
 using HotelBooking.Infrastructure.Data.DbContexts;
 using HotelBooking.Infrastructure.Implementations.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Infrastructure.Implementations
 {
