@@ -1,6 +1,5 @@
 ﻿using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Services.Interfaces;
-using HotelBooking.Domain.Contracts;
 using HotelBooking.Infrastructure.Data.DataSeed.Implementations;
 using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
 using HotelBooking.Infrastructure.Data.DbContexts;
@@ -35,7 +34,7 @@ namespace HotelBooking.Infrastructure.DependencyInjection
             services.AddScoped<IJsonFileReader, JsonFileReader>();
             services.AddKeyedScoped<IDataInitializer, DataInitializer>("Default");
             services.AddKeyedScoped<IDataInitializer, IdentityDataInitializer>("Identity");
-            
+
 
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             services.AddScoped<IJwtService, JwtService>();

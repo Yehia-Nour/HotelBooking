@@ -1,11 +1,6 @@
 ﻿using HotelBooking.Domain.Entities.Geography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Infrastructure.Data.Configurations
 {
@@ -14,6 +9,11 @@ namespace HotelBooking.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<State> builder)
         {
             builder.Property(s => s.StateName).HasMaxLength(50);
+
+            builder.Property(s => s.CreatedBy).HasMaxLength(100);
+            builder.Property(s => s.CreatedDate).HasDefaultValueSql("GETDATE()");
+
+            builder.Property(s => s.ModifiedBy).HasMaxLength(100);
         }
     }
 }

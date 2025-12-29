@@ -124,7 +124,7 @@ namespace HotelBooking.Infrastructure.Identity
 
             var existingRoles = await _userManager.GetRolesAsync(user);
             if (existingRoles.Contains("Admin"))
-                return Result.Fail(Error.Validation( "Role.AssignmentFailed", "Cannot assign a new role because the user is an Admin"));
+                return Result.Fail(Error.Validation("Role.AssignmentFailed", "Cannot assign a new role because the user is an Admin"));
 
             if (existingRoles.Contains(roleName))
                 return Result.Fail(Error.Validation("Role.Exists", $"User already has role '{roleName}'"));

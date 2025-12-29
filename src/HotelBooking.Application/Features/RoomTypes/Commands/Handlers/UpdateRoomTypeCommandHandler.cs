@@ -1,52 +1,46 @@
 ﻿using AutoMapper;
-using HotelBooking.Application.DTOs.RoomTypeDTOs;
-using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
+using HotelBooking.Application.Features.Countries.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.RoomTypeSpecifications;
+using HotelBooking.Application.Specifications.CountrySpecifications;
 using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Rooms;
+using HotelBooking.Domain.Entities.Geography;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
 {
-    public class UpdateRoomTypeCommandHandler : IRequestHandler<UpdateRoomTypeWithUserCommand, Result>
+    public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryWithUserCommand, Result>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public UpdateRoomTypeCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdateCountryCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<Result> Handle(UpdateRoomTypeWithUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(UpdateCountryWithUserCommand request, CancellationToken cancellationToken)
         {
-            var repo = _unitOfWork.GetRepository<RoomType>();
+            var repo = _unitOfWork.GetRepository<Country>();
 
-            var roomType = await repo.GetByIdAsync(request.Command.RoomTypeId);
-            if (roomType is null)
-                return Result.Fail(Error.NotFound("RoomType.NotFound", $"RoomType with id {request.Command.RoomTypeId} not found"));
+            var country = await repo.GetByIdAsync(request.Command.CountryId);
+            if (country is null)
+                return Result.Fail(Error.NotFound("Country.NotFound", $"Country with id {request.Command.CountryId} not found"));
 
-            var spec = RoomTypeByNameSpecification.ForName(request.Command.TypeName);
-            var existingRoomType = await repo.GetAsync(new List<IBaseSpecification<RoomType>> { spec });
-            if (existingRoomType is not null && existingRoomType.TypeName != roomType.TypeName)
-                return Result.Fail(Error.Failure("RoomType.Failure", description: $"A room type with this name {request.Command.TypeName} already exists"));
+            var spec = CountryByNameSpecification.ForName(request.Command.CountryName);
+            var existingCountry = await repo.GetAsync(new List<IBaseSpecification<Country>> { spec });
+            if (existingCountry is not null && existingCountry.Id != country.Id)
+                return Result.Fail(Error.Failure("Country.Failure", $"A country with name {request.Command.CountryName} already exists"));
 
-            _mapper.Map(request.Command, roomType);
-            roomType.ModifiedBy = request.UserEmail;
+            _mapper.Map(request.Command, country);
+            country.ModifiedBy = request.UserEmail;
 
-            repo.Update(roomType);
+            repo.Update(country);
 
             int result = await _unitOfWork.SaveChangesAsync();
             if (result == 0)
-                return Result.Fail(Error.Failure("RoomType.Failure", $"RoomType can't be updated"));
+                return Result.Fail(Error.Failure("Country.Failure", "Country can't be updated"));
 
             return Result.Ok();
         }

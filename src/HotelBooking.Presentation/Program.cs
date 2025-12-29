@@ -4,7 +4,6 @@ using HotelBooking.Infrastructure.DependencyInjection;
 using HotelBooking.Presentation.CustomMiddlewares;
 using HotelBooking.Presentation.DependencyInjection;
 using HotelBooking.Presentation.Extensions;
-using System.Threading.Tasks;
 
 namespace HotelBooking.API
 {
@@ -25,7 +24,7 @@ namespace HotelBooking.API
             var app = builder.Build();
 
             await app.MigrateDatabaseAsync();
-            await app.SeedDatabaseAsync(); 
+            await app.SeedDatabaseAsync();
             await app.SeedIdentityDatabaseAsync();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();

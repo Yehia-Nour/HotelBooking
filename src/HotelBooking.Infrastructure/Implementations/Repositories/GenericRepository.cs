@@ -3,11 +3,6 @@ using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Common;
 using HotelBooking.Infrastructure.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Infrastructure.Implementations.Repositories
 {
@@ -33,6 +28,8 @@ namespace HotelBooking.Infrastructure.Implementations.Repositories
                 => await SpecificationEvaluator.CreateQuery(_dbSet, specifications).FirstOrDefaultAsync();
 
         public async Task AddAsync(TEntity entity) => await _dbSet.AddAsync(entity);
+
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities) => await _dbSet.AddRangeAsync(entities);
 
         public void Update(TEntity entity) => _dbSet.Update(entity);
 

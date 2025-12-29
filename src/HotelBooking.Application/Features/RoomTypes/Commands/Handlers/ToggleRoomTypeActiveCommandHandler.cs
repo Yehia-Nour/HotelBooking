@@ -5,11 +5,6 @@ using HotelBooking.Application.Specifications.RoomTypeSpecifications;
 using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
 {
@@ -42,5 +37,4 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
             return Result.Ok();
         }
     }
-
 }

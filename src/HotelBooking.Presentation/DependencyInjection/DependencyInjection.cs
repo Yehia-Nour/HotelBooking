@@ -49,7 +49,8 @@ namespace HotelBooking.Presentation.DependencyInjection
             {
                 option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => {
+            }).AddJwtBearer(options =>
+            {
                 options.SaveToken = true;
 
                 options.TokenValidationParameters = new TokenValidationParameters
