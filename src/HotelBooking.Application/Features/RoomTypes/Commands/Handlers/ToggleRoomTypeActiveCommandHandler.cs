@@ -37,5 +37,4 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
             return Result.Ok();
         }
     }
-
 }

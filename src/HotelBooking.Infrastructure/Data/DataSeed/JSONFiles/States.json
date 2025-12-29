@@ -1,26 +1,32 @@
 [
   {
     "StateName": "Cairo",
-    "CountryID": 1
+    "CountryID": 1,
+    "CreatedBy": "System"
   },
   {
     "StateName": "Giza",
-    "CountryID": 1
+    "CountryID": 1,
+    "CreatedBy": "System"
   },
   {
     "StateName": "Riyadh",
-    "CountryID": 2
+    "CountryID": 2,
+    "CreatedBy": "System"
   },
   {
     "StateName": "Jeddah",
-    "CountryID": 2
+    "CountryID": 2,
+    "CreatedBy": "System"
   },
   {
     "StateName": "Dubai",
-    "CountryID": 3
+    "CountryID": 3,
+    "CreatedBy": "System"
   },
   {
     "StateName": "Abu Dhabi",
-    "CountryID": 3
+    "CountryID": 3,
+    "CreatedBy": "System"
   }
 ]

@@ -2,7 +2,7 @@
 
 namespace HotelBooking.Domain.Entities.Geography
 {
-    public class Country : BaseEntity
+    public class Country : AuditableEntity
     {
         public string CountryName { get; set; } = default!;
         public string CountryCode { get; set; } = default!;

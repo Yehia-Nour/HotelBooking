@@ -7,7 +7,7 @@ using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Geography;
 using MediatR;
 
-namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
+namespace HotelBooking.Application.Features.Countries.Commands.Handlers
 {
     public class UpdateCountryCommandHandler : IRequestHandler<UpdateCountryWithUserCommand, Result>
     {
@@ -23,8 +23,8 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
         public async Task<Result> Handle(UpdateCountryWithUserCommand request, CancellationToken cancellationToken)
         {
             var repo = _unitOfWork.GetRepository<Country>();
-
             var country = await repo.GetByIdAsync(request.Command.CountryId);
+
             if (country is null)
                 return Result.Fail(Error.NotFound("Country.NotFound", $"Country with id {request.Command.CountryId} not found"));
 
@@ -37,12 +37,10 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
             country.ModifiedBy = request.UserEmail;
 
             repo.Update(country);
-
-            int result = await _unitOfWork.SaveChangesAsync();
-            if (result == 0)
-                return Result.Fail(Error.Failure("Country.Failure", "Country can't be updated"));
+            await _unitOfWork.SaveChangesAsync();
 
             return Result.Ok();
         }
     }
+
 }

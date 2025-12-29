@@ -11,6 +11,11 @@ namespace HotelBooking.Infrastructure.Data.Configurations
             builder.Property(c => c.CountryName).HasMaxLength(50);
 
             builder.Property(c => c.CountryCode).HasMaxLength(10);
+
+            builder.Property(c => c.CreatedBy).HasMaxLength(100);
+            builder.Property(c => c.CreatedDate).HasDefaultValueSql("GETDATE()");
+
+            builder.Property(c => c.ModifiedBy).HasMaxLength(100);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace HotelBooking.Domain.Entities.Geography
 {
-    public class State : BaseEntity
+    public class State : AuditableEntity
     {
         public string StateName { get; set; } = default!;
         public bool IsActive { get; set; } = true;
