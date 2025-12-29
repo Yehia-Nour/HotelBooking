@@ -23,6 +23,5 @@ namespace HotelBooking.Application.Specifications.RoomSpecifications
                 && (!queryParams.Status.HasValue || r.Status == (BookingStatus)queryParams.Status.Value)
             );
         }
-
     }
 }

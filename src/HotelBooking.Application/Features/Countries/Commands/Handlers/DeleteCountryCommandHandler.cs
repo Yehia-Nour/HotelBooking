@@ -12,10 +12,7 @@ namespace HotelBooking.Application.Features.Countries.Commands.Handlers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public DeleteCountryCommandHandler(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
+        public DeleteCountryCommandHandler(IUnitOfWork unitOfWork) { _unitOfWork = unitOfWork; }
 
         public async Task<Result> Handle(DeleteCountryCommand request, CancellationToken cancellationToken)
         {
