@@ -3,7 +3,6 @@ using HotelBooking.Application.Features.Rooms.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.RoomSpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
 
@@ -30,7 +29,7 @@ namespace HotelBooking.Application.Features.Rooms.Commands.Handlers
                 return Error.Failure("Room.Failure", $"RoomType id {request.Command.RoomTypeID} is not found");
 
             var spec = RoomByNumberSpecification.ForNumber(request.Command.RoomNumber);
-            var existingRoom = await repo.GetAsync(new List<IBaseSpecification<Room>> { spec });
+            var existingRoom = await repo.GetAsync([spec]);
             if (existingRoom is not null)
                 return Error.Failure("Room.Failure", description: $"A room  with this number {request.Command.RoomNumber} already exists");
 

@@ -7,8 +7,7 @@ using MediatR;
 
 namespace HotelBooking.Application.Features.Amenities.Commands.Handlers
 {
-    public class CreateAmenitiesCommandHandler
-        : IRequestHandler<CreateAmenitiesWithUserCommand, Result<int>>
+    public class CreateAmenitiesCommandHandler : IRequestHandler<CreateAmenitiesWithUserCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

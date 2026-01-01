@@ -29,9 +29,8 @@ namespace HotelBooking.Application.Features.Rooms.Queries.Handlers
             var sortingSpec = RoomSortingSpecification.ByOption(request.QueryParams.SortingOption);
             var paginationSpec = RoomPaginationSpecification.ForQuery(request.QueryParams);
 
-            var specList = new List<IBaseSpecification<Room>> { matchingSpec, sortingSpec, paginationSpec };
 
-            var rooms = await repo.GetAllAsync(specList);
+            var rooms = await repo.GetAllAsync([matchingSpec, sortingSpec, paginationSpec]);
             var dataToReturn = _mapper.Map<IEnumerable<RoomDTO>>(rooms);
             var countOfReturnData = dataToReturn.Count();
 

@@ -4,7 +4,6 @@ using HotelBooking.Application.Features.Countries.Queries.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.CountrySpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Geography;
 using MediatR;
 
@@ -26,7 +25,7 @@ namespace HotelBooking.Application.Features.Countries.Queries.Handlers
         {
             var spec = CountryByActiveSpecification.ForStatus(request.IsActive);
 
-            var countries = await _unitOfWork.GetRepository<Country>().GetAllAsync(new List<IBaseSpecification<Country>> { spec });
+            var countries = await _unitOfWork.GetRepository<Country>().GetAllAsync([spec]);
 
             var countryDtos = _mapper.Map<List<CountryDTO>>(countries);
 

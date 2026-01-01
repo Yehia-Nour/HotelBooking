@@ -23,9 +23,6 @@
     <Folder Include="Features\NewFolder - Copy\Commands\Validators\" />
     <Folder Include="Features\NewFolder - Copy\Queries\Handlers\" />
     <Folder Include="Features\NewFolder - Copy\Queries\Requests\" />
-    <Folder Include="Features\RoomAmenities\Commands\Handlers\" />
-    <Folder Include="Features\RoomAmenities\Commands\Requests\" />
-    <Folder Include="Features\RoomAmenities\Commands\Validators\" />
     <Folder Include="Services\Implementations\" />
   </ItemGroup>
 

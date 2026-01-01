@@ -3,7 +3,6 @@ using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.RoomTypeSpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
 
@@ -25,7 +24,7 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
             var repo = _unitOfWork.GetRepository<RoomType>();
 
             var spec = RoomTypeByNameSpecification.ForName(request.Command.TypeName);
-            var existingRoomType = await repo.GetAsync(new List<IBaseSpecification<RoomType>> { spec });
+            var existingRoomType = await repo.GetAsync([spec]);
             if (existingRoomType is not null)
                 return Error.Failure("RoomType.Failure", description: $"A room type with this name {request.Command.TypeName} already exists");
 

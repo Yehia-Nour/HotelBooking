@@ -3,7 +3,6 @@ using HotelBooking.Application.Features.States.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.StateSpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Geography;
 using MediatR;
 
@@ -28,7 +27,7 @@ namespace HotelBooking.Application.Features.States.Commands.Handlers
                 return Error.Failure("State.Failure", $"Country with id {request.Command.CountryID} not found");
 
             var spec = StateByNameSpecification.ForName(request.Command.StateName, request.Command.CountryID);
-            var existingState = await _unitOfWork.GetRepository<State>().GetAsync(new List<IBaseSpecification<State>> { spec });
+            var existingState = await _unitOfWork.GetRepository<State>().GetAsync([spec]);
             if (existingState is not null)
                 return Error.Failure("State.Failure", $"A state with this name {request.Command.StateName} already exists in this country");
 

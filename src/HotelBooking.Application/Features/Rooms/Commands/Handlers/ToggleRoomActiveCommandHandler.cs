@@ -2,7 +2,6 @@
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.RoomSpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Reservations;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
@@ -24,7 +23,7 @@ namespace HotelBooking.Application.Features.Rooms.Commands.Handlers
                 return Result.Fail(Error.NotFound("Room.NotFound", $"Room with id {request.RoomId} not found"));
 
             var spec = ReservationsByRoomIdSpecification.ForRoomId(room.Id);
-            var reservationLinkedRoom = await _unitOfWork.GetRepository<Reservation>().GetAsync(new List<IBaseSpecification<Reservation>> { spec });
+            var reservationLinkedRoom = await _unitOfWork.GetRepository<Reservation>().GetAsync([spec]);
             if (room.IsActive && reservationLinkedRoom is not null)
                 return Result.Fail(Error.Failure("Room.HasRelatedReservations", $"Room with id {request.RoomId} cannot be deactivated because it has associated Reservations"));
 

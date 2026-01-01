@@ -10,6 +10,7 @@ namespace HotelBooking.Application.MappingProfiles
         public RoomAmenityProfile()
         {
             CreateMap<RoomAmenity, AmenityDTO>().IncludeMembers(src => src.Amenity);
+
             CreateMap<RoomAmenity, RoomTypeDTO>().IncludeMembers(src => src.RoomType);
         }
     }

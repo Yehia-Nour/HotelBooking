@@ -5,14 +5,14 @@ namespace HotelBooking.Application.Features.Amenities.Commands.Validators
 {
     public class CreateAmenitiesValidator : AbstractValidator<CreateAmenitiesCommand>
     {
-        private const int MaxAmenitiesCount = 10;
+        private const int _maxAmenitiesCount = 10;
 
         public CreateAmenitiesValidator()
         {
             RuleFor(ca => ca.Amenities)
                 .NotEmpty()
-                .Must(ca => ca.Count <= MaxAmenitiesCount)
-                .WithMessage($"Maximum allowed amenities is {MaxAmenitiesCount}");
+                .Must(ca => ca.Count <= _maxAmenitiesCount)
+                .WithMessage($"Maximum allowed amenities is {_maxAmenitiesCount}");
 
             RuleForEach(ca => ca.Amenities)
                 .SetValidator(new CreateAmenityValidator());

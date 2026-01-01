@@ -14,9 +14,7 @@ namespace HotelBooking.Application.Features.RoomAmenities.Queries.Handlers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllRoomTypesByAmenityIdQueryHandler(
-            IUnitOfWork unitOfWork,
-            IMapper mapper)
+        public GetAllRoomTypesByAmenityIdQueryHandler(  IUnitOfWork unitOfWork,  IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -26,7 +24,7 @@ namespace HotelBooking.Application.Features.RoomAmenities.Queries.Handlers
         {
             var spec = RoomTypesByAmenityIdSpecification.ForAmenity(request.AmenityId);
 
-            var roomTypes = await _unitOfWork.GetRepository<RoomAmenity>().GetAllAsync(new List<IBaseSpecification<RoomAmenity>> { spec });
+            var roomTypes = await _unitOfWork.GetRepository<RoomAmenity>().GetAllAsync([spec]);
 
             return _mapper.Map<IEnumerable<RoomTypeDTO>>(roomTypes);
         }
