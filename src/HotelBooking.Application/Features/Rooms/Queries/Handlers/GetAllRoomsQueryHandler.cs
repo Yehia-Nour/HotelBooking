@@ -25,7 +25,7 @@ namespace HotelBooking.Application.Features.Rooms.Queries.Handlers
         {
             var repo = _unitOfWork.GetRepository<Room>();
 
-            var matchingSpec = RoomsMatchingQuerySpecification.ForQuery(request.QueryParams);
+            var matchingSpec = RoomCriteriaSpecification.MatchingQuery(request.QueryParams);
             var sortingSpec = RoomSortingSpecification.ByOption(request.QueryParams.SortingOption);
             var paginationSpec = RoomPaginationSpecification.ForQuery(request.QueryParams);
 

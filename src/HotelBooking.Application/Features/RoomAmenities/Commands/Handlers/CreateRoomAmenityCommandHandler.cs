@@ -31,7 +31,7 @@ namespace HotelBooking.Application.Features.RoomAmenities.Commands.Handlers
 
             var repo = _unitOfWork.GetRepository<RoomAmenity>();
 
-            var spec = RoomAmenityByRoomTypeAndAmenityIdSpecification.ForRoomTypeAndAmenity(request.RoomTypeId, request.AmenityId);
+            var spec = RoomAmenityCriteriaSpecification.ByRoomTypeIdAndAmenityId(request.RoomTypeId, request.AmenityId);
 
             var roomAmenity = await repo.GetAsync([spec]);
             if (roomAmenity is not null)

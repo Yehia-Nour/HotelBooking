@@ -27,7 +27,7 @@ namespace HotelBooking.Application.Features.Countries.Commands.Handlers
             if (country is null)
                 return Result.Fail(Error.NotFound("Country.NotFound", $"Country with id {request.Command.CountryId} not found"));
 
-            var spec = CountryByNameSpecification.ForName(request.Command.CountryName);
+            var spec = CountryCriteriaSpecification.ByName(request.Command.CountryName);
             var existingCountry = await repo.GetAsync([spec]);
             if (existingCountry is not null && existingCountry.Id != country.Id)
                 return Result.Fail(Error.Failure("Country.Failure", $"A country with name {request.Command.CountryName} already exists"));

@@ -2,31 +2,32 @@
 using HotelBooking.Application.DTOs.RoomTypeDTOs;
 using HotelBooking.Application.Features.RoomAmenities.Queries.Requests;
 using HotelBooking.Application.Interfaces;
+using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.RoomAmenitySpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
 
 namespace HotelBooking.Application.Features.RoomAmenities.Queries.Handlers
 {
-    public class GetAllRoomTypesByAmenityIdQueryHandler : IRequestHandler<GetAllRoomTypesByAmenityIdQuery, IEnumerable<RoomTypeDTO>>
+    public class GetAllRoomTypesByAmenityIdQueryHandler : IRequestHandler<GetAllRoomTypesByAmenityIdQuery, Result<IEnumerable<RoomTypeDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public GetAllRoomTypesByAmenityIdQueryHandler(  IUnitOfWork unitOfWork,  IMapper mapper)
+        public GetAllRoomTypesByAmenityIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<RoomTypeDTO>> Handle(GetAllRoomTypesByAmenityIdQuery request, CancellationToken cancellationToken)
+        public async Task<Result<IEnumerable<RoomTypeDTO>>> Handle(GetAllRoomTypesByAmenityIdQuery request, CancellationToken cancellationToken)
         {
-            var spec = RoomTypesByAmenityIdSpecification.ForAmenity(request.AmenityId);
+            var criteria = RoomAmenityCriteriaSpecification.ByAmenityId(request.AmenityId);
+            var include = RoomAmenityIncludeSpecification.RoomType();
 
-            var roomTypes = await _unitOfWork.GetRepository<RoomAmenity>().GetAllAsync([spec]);
+            var roomTypes = await _unitOfWork.GetRepository<RoomAmenity>().GetAllAsync([criteria, include]);
 
-            return _mapper.Map<IEnumerable<RoomTypeDTO>>(roomTypes);
+            return _mapper.Map<List<RoomTypeDTO>>(roomTypes);
         }
     }
 }

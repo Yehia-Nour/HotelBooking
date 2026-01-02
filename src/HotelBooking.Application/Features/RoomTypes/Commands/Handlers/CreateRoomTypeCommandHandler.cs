@@ -23,7 +23,7 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
         {
             var repo = _unitOfWork.GetRepository<RoomType>();
 
-            var spec = RoomTypeByNameSpecification.ForName(request.Command.TypeName);
+            var spec = RoomTypeCriteriaSpecification.ByName(request.Command.TypeName);
             var existingRoomType = await repo.GetAsync([spec]);
             if (existingRoomType is not null)
                 return Error.Failure("RoomType.Failure", description: $"A room type with this name {request.Command.TypeName} already exists");

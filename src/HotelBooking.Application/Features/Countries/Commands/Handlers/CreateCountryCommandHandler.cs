@@ -23,7 +23,7 @@ namespace HotelBooking.Application.Features.Countries.Commands.Handlers
         {
             var repo = _unitOfWork.GetRepository<Country>();
 
-            var spec = CountryByNameSpecification.ForName(request.Command.CountryName);
+            var spec = CountryCriteriaSpecification.ByName(request.Command.CountryName);
             var existingCountry = await repo.GetAsync([spec]);
             if (existingCountry is not null)
                 return Error.Failure("Country.Failure", $"A country with this name {request.Command.CountryName} already exists");

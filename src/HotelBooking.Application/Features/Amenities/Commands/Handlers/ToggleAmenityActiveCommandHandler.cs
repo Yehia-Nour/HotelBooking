@@ -1,7 +1,7 @@
 ﻿using HotelBooking.Application.Features.Amenities.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.AmenitySpecifications;
+using HotelBooking.Application.Specifications.RoomAmenitySpecifications;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
 
@@ -21,7 +21,7 @@ namespace HotelBooking.Application.Features.Amenities.Commands.Handlers
             if (amenity is null)
                 return Result.Fail(Error.NotFound("Amenity.NotFound", $"Amenity with id {request.AmenityId} not found"));
 
-            var spec = RoomAmenityByAmenityIdSpecification.ForAmenityId(request.AmenityId);
+            var spec = RoomAmenityCriteriaSpecification.ByAmenityId(request.AmenityId);
             var roomTypeLinkedAmenity = await _unitOfWork.GetRepository<RoomAmenity>().GetAsync([spec]);
             if (amenity.IsActive && roomTypeLinkedAmenity is not null)
                 return Result.Fail(Error.Failure("Amenity.HasRelatedRoomTypes", $"Amenity with id {request.AmenityId} cannot be deactivated because it has associated RoomTypes"));

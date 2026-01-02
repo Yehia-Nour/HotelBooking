@@ -27,7 +27,7 @@ namespace HotelBooking.Application.Features.Rooms.Commands.Handlers
             if (room is null)
                 return Result.Fail(Error.NotFound("Room.NotFound", $"Room with id {request.Command.RoomId} not found"));
 
-            var spec = RoomByNumberSpecification.ForNumber(request.Command.RoomNumber);
+            var spec = RoomCriteriaSpecification.ByRoomNumber(request.Command.RoomNumber);
             var existingRoom = await repo.GetAsync([spec]);
             if (existingRoom is not null && existingRoom.RoomNumber != room.RoomNumber)
                 return Result.Fail(Error.Failure("Room.Failure", $"A room  with this number {request.Command.RoomNumber} already exists"));

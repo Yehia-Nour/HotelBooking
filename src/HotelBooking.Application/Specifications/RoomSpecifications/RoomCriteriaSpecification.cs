@@ -5,23 +5,26 @@ using System.Linq.Expressions;
 
 namespace HotelBooking.Application.Specifications.RoomSpecifications
 {
-    public class RoomsMatchingQuerySpecification : ICriteriaSpecification<Room>
+    internal class RoomCriteriaSpecification : ICriteriaSpecification<Room>
     {
         public Expression<Func<Room, bool>> Criteria { get; }
 
-        private RoomsMatchingQuerySpecification(Expression<Func<Room, bool>> criteria)
-        {
-            Criteria = criteria;
-        }
+        private RoomCriteriaSpecification(Expression<Func<Room, bool>> criteria)
+            => Criteria = criteria;
 
-        public static RoomsMatchingQuerySpecification ForQuery(RoomQueryParams queryParams)
-        {
-            return new(r =>
+        public static RoomCriteriaSpecification ByRoomTypeId(int roomTypeId)
+            => new(r => r.RoomTypeID == roomTypeId);
+
+        public static RoomCriteriaSpecification ByRoomNumber(string number)
+            => new(r => r.RoomNumber == number);
+
+        public static RoomCriteriaSpecification MatchingQuery(RoomQueryParams queryParams)
+            => new(r =>
                 (!queryParams.RoomTypeId.HasValue || r.RoomTypeID == queryParams.RoomTypeId.Value)
                 && (string.IsNullOrEmpty(queryParams.SearchByRoomNumber)
                     || r.RoomNumber.Contains(queryParams.SearchByRoomNumber))
                 && (!queryParams.Status.HasValue || r.Status == (BookingStatus)queryParams.Status.Value)
             );
-        }
     }
 }
+

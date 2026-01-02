@@ -24,7 +24,7 @@ namespace HotelBooking.Application.Features.States.Queries.Handlers
         {
             var repo = _unitOfWork.GetRepository<State>();
 
-            var spec = StatesMatchingQuerySpecification.ForQuery(request.QueryParams);
+            var spec = StateCriteriaSpecification.ForQuery(request.QueryParams);
 
             var states = await repo.GetAllAsync([spec]);
 

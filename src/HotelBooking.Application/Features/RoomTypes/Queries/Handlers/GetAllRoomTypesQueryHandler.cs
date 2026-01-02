@@ -22,7 +22,7 @@ namespace HotelBooking.Application.Features.RoomTypes.Queries.Handlers
 
         public async Task<Result<IEnumerable<RoomTypeDTO>>> Handle(GetAllRoomTypesQuery request, CancellationToken cancellationToken)
         {
-            var spec = RoomTypeByActiveSpecification.ForStatus(request.IsActive);
+            var spec = RoomTypeCriteriaSpecification.ByStatus(request.IsActive);
 
             var roomTypes = await _unitOfWork.GetRepository<RoomType>().GetAllAsync([spec]);
 

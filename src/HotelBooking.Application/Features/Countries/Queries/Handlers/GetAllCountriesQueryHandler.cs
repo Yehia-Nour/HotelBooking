@@ -23,7 +23,7 @@ namespace HotelBooking.Application.Features.Countries.Queries.Handlers
 
         public async Task<Result<IEnumerable<CountryDTO>>> Handle(GetAllCountriesQuery request, CancellationToken cancellationToken)
         {
-            var spec = CountryByActiveSpecification.ForStatus(request.IsActive);
+            var spec = CountryCriteriaSpecification.ByStatus(request.IsActive);
 
             var countries = await _unitOfWork.GetRepository<Country>().GetAllAsync([spec]);
 

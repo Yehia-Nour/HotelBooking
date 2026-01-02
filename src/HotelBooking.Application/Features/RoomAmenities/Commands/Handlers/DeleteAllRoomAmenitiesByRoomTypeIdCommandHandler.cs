@@ -21,7 +21,7 @@ namespace HotelBooking.Application.Features.RoomAmenities.Commands.Handlers
             if (roomType is null)
                 return Result.Fail(Error.NotFound("RoomType.NotFound", $"RoomType with id {request.RoomTypeId} not found"));
 
-            var spec = AmenitiesByRoomTypeIdSpecification.ForRoomType(request.RoomTypeId);
+            var spec = RoomAmenityCriteriaSpecification.ByRoomTypeId(request.RoomTypeId);
 
             var amenities = await repo.GetAllAsync([spec]);
             if (!amenities.Any())
