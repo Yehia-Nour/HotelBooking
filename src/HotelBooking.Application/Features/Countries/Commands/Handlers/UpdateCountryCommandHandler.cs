@@ -3,7 +3,6 @@ using HotelBooking.Application.Features.Countries.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.CountrySpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Geography;
 using MediatR;
 
@@ -28,8 +27,8 @@ namespace HotelBooking.Application.Features.Countries.Commands.Handlers
             if (country is null)
                 return Result.Fail(Error.NotFound("Country.NotFound", $"Country with id {request.Command.CountryId} not found"));
 
-            var spec = CountryByNameSpecification.ForName(request.Command.CountryName);
-            var existingCountry = await repo.GetAsync(new List<IBaseSpecification<Country>> { spec });
+            var spec = CountryCriteriaSpecification.ByName(request.Command.CountryName);
+            var existingCountry = await repo.GetAsync([spec]);
             if (existingCountry is not null && existingCountry.Id != country.Id)
                 return Result.Fail(Error.Failure("Country.Failure", $"A country with name {request.Command.CountryName} already exists"));
 

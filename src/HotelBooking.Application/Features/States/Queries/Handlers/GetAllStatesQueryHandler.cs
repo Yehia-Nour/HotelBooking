@@ -4,7 +4,6 @@ using HotelBooking.Application.Features.States.Queries.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.StateSpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Geography;
 using MediatR;
 
@@ -25,9 +24,9 @@ namespace HotelBooking.Application.Features.States.Queries.Handlers
         {
             var repo = _unitOfWork.GetRepository<State>();
 
-            var spec = StatesMatchingQuerySpecification.ForQuery(request.QueryParams);
+            var spec = StateCriteriaSpecification.ForQuery(request.QueryParams);
 
-            var states = await repo.GetAllAsync(new List<IBaseSpecification<State>> { spec });
+            var states = await repo.GetAllAsync([spec]);
 
             var stateDtos = _mapper.Map<List<StateDTO>>(states);
 

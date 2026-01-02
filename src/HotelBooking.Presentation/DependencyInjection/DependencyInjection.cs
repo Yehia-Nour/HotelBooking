@@ -1,5 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
+using HotelBooking.Presentation.Factories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -13,7 +15,7 @@ namespace HotelBooking.Presentation.DependencyInjection
             IConfiguration configuration)
         {
             services.AddControllers().AddJsonOptions(options =>
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(c =>
@@ -65,6 +67,11 @@ namespace HotelBooking.Presentation.DependencyInjection
             });
 
             services.AddFluentValidationAutoValidation();
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationResponse;
+            });
 
             return services;
         }

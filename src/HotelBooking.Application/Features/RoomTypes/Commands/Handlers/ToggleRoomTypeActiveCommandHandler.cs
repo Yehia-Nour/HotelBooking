@@ -1,8 +1,7 @@
 ﻿using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.RoomTypeSpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
+using HotelBooking.Application.Specifications.RoomSpecifications;
 using HotelBooking.Domain.Entities.Rooms;
 using MediatR;
 
@@ -22,8 +21,8 @@ namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
             if (roomType is null)
                 return Result.Fail(Error.NotFound("RoomType.NotFound", $"RoomType with id {request.RoomTypeId} not found"));
 
-            var spec = RoomsByRoomTypeIdSpecification.ForTypeId(request.RoomTypeId);
-            var roomLinkedRoomType = await _unitOfWork.GetRepository<Room>().GetAsync(new List<IBaseSpecification<Room>> { spec });
+            var spec = RoomCriteriaSpecification.ByRoomTypeId(request.RoomTypeId);
+            var roomLinkedRoomType = await _unitOfWork.GetRepository<Room>().GetAsync([spec]);
 
             if (roomType.IsActive && roomLinkedRoomType is not null)
                 return Result.Fail(Error.Failure("RoomType.HasRelatedRooms", "RoomType cannot be deactivated because it has associated rooms"));

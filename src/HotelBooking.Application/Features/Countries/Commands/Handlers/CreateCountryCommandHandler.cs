@@ -3,7 +3,6 @@ using HotelBooking.Application.Features.Countries.Commands.Requests;
 using HotelBooking.Application.Interfaces;
 using HotelBooking.Application.Results;
 using HotelBooking.Application.Specifications.CountrySpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Geography;
 using MediatR;
 
@@ -24,8 +23,8 @@ namespace HotelBooking.Application.Features.Countries.Commands.Handlers
         {
             var repo = _unitOfWork.GetRepository<Country>();
 
-            var spec = CountryByNameSpecification.ForName(request.Command.CountryName);
-            var existingCountry = await repo.GetAsync(new List<IBaseSpecification<Country>> { spec });
+            var spec = CountryCriteriaSpecification.ByName(request.Command.CountryName);
+            var existingCountry = await repo.GetAsync([spec]);
             if (existingCountry is not null)
                 return Error.Failure("Country.Failure", $"A country with this name {request.Command.CountryName} already exists");
 

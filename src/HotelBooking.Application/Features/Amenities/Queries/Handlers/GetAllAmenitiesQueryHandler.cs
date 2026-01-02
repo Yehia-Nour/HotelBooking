@@ -23,7 +23,7 @@ namespace HotelBooking.Application.Features.Amenities.Queries.Handlers
 
         public async Task<Result<IEnumerable<AmenityDTO>>> Handle(GetAllAmenitiesQuery request, CancellationToken cancellationToken)
         {
-            var spec = AmenityByActiveSpecification.ForStatus(request.IsActive);
+            var spec = AmenityCriteriaSpecification.ForStatus(request.IsActive);
 
             var amenities = await _unitOfWork.GetRepository<Amenity>().GetAllAsync(new List<IBaseSpecification<Amenity>> { spec });
 
