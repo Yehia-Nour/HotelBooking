@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Application.DTOs.RoomDTOs
+﻿namespace HotelBooking.Application.Features.Rooms.Queries.Requests
 {
     public enum RoomSortingOption
     {

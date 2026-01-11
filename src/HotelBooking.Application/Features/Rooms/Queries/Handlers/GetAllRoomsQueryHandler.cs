@@ -10,7 +10,7 @@ using MediatR;
 
 namespace HotelBooking.Application.Features.Rooms.Queries.Handlers
 {
-    public class GetAllRoomsQueryHandler : IRequestHandler<GetAllRoomsQuery, Result<PaginatedResult<RoomDTO>>>
+    public class GetAllRoomsQueryHandler : IRequestHandler<GetAllRoomsQuery, Result<PaginatedResultDTO<RoomDTO>>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace HotelBooking.Application.Features.Rooms.Queries.Handlers
             _mapper = mapper;
         }
 
-        public async Task<Result<PaginatedResult<RoomDTO>>> Handle(GetAllRoomsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<PaginatedResultDTO<RoomDTO>>> Handle(GetAllRoomsQuery request, CancellationToken cancellationToken)
         {
             var repo = _unitOfWork.GetRepository<Room>();
 
@@ -36,7 +36,7 @@ namespace HotelBooking.Application.Features.Rooms.Queries.Handlers
 
             var countOfAllRooms = await repo.CountAsync(new List<IBaseSpecification<Room>> { matchingSpec });
 
-            return new PaginatedResult<RoomDTO>(request.QueryParams.PageIndex, countOfReturnData, countOfAllRooms, dataToReturn);
+            return new PaginatedResultDTO<RoomDTO>(request.QueryParams.PageIndex, countOfReturnData, countOfAllRooms, dataToReturn);
         }
     }
 }
