@@ -15,7 +15,7 @@ namespace HotelBooking.Presentation.Controllers
         public RoomsController(IMediator mediator) { _mediator = mediator; }
 
         [HttpGet]
-        public async Task<ActionResult<PaginatedResult<RoomDTO>>> GetAllRooms([FromQuery] RoomQueryParams roomQuery)
+        public async Task<ActionResult<PaginatedResultDTO<RoomDTO>>> GetAllRooms([FromQuery] RoomQueryParams roomQuery)
         {
             var result = await _mediator.Send(new GetAllRoomsQuery(roomQuery));
 

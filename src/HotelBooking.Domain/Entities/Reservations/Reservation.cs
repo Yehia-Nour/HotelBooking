@@ -17,6 +17,8 @@ namespace HotelBooking.Domain.Entities.Reservations
         public int RoomID { get; set; }
         public Room Room { get; set; } = default!;
 
+        public Feedback? Feedback { get; set; }
+
         public ICollection<ReservationGuest> ReservationGuests { get; set; } = default!;
         public ICollection<Payment> Payments { get; set; } = default!;
     }

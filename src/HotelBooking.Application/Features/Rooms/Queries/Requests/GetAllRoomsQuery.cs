@@ -4,5 +4,5 @@ using MediatR;
 
 namespace HotelBooking.Application.Features.Rooms.Queries.Requests
 {
-    public record GetAllRoomsQuery(RoomQueryParams QueryParams) : IRequest<Result<PaginatedResult<RoomDTO>>>;
+    public record GetAllRoomsQuery(RoomQueryParams QueryParams) : IRequest<Result<PaginatedResultDTO<RoomDTO>>>;
 }

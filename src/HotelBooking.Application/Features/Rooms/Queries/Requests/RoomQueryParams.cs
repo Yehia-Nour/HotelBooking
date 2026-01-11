@@ -1,4 +1,4 @@
-﻿namespace HotelBooking.Application.DTOs.RoomDTOs
+﻿namespace HotelBooking.Application.Features.Rooms.Queries.Requests
 {
     public class RoomQueryParams
     {
@@ -13,7 +13,7 @@
             get { return _pageIndex; }
             set
             {
-                _pageIndex = (value <= 0 ? 1 : value);
+                _pageIndex = value <= 0 ? 1 : value;
             }
         }
 

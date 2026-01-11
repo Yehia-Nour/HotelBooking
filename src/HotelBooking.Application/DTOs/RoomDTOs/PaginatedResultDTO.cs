@@ -1,8 +1,8 @@
 ﻿namespace HotelBooking.Application.DTOs.RoomDTOs
 {
-    public class PaginatedResult<TEntity>
+    public class PaginatedResultDTO<TEntity>
     {
-        public PaginatedResult(int pageIndex, int pageSize, int count, IEnumerable<TEntity> data)
+        public PaginatedResultDTO(int pageIndex, int pageSize, int count, IEnumerable<TEntity> data)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;

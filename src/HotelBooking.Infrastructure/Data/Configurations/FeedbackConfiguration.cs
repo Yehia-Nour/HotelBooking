@@ -17,6 +17,12 @@ namespace HotelBooking.Infrastructure.Data.Configurations
                     "Rating BETWEEN 1 AND 5"
                 );
             });
+
+            builder.HasOne(f => f.Reservation)
+                   .WithOne(r => r.Feedback)
+                   .HasForeignKey<Feedback>(f => f.ReservationID)
+                   .OnDelete(DeleteBehavior.Restrict)
+                   .IsRequired(false);
         }
     }
 }

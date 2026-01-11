@@ -22,7 +22,6 @@ namespace HotelBooking.Application.Features.Rooms.Queries.Handlers
         public async Task<Result<RoomDTO>> Handle(GetRoomByIdQuery request, CancellationToken cancellationToken)
         {
             var room = await _unitOfWork.GetRepository<Room>().GetByIdAsync(request.Id);
-
             if (room is null)
                 return Error.NotFound("Room.NotFound", $"Room with id {request.Id} not found");
 

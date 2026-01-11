@@ -1,4 +1,4 @@
-﻿using HotelBooking.Application.DTOs.RoomDTOs;
+﻿using HotelBooking.Application.Features.Rooms.Queries.Requests;
 using HotelBooking.Domain.Contracts.Specifications;
 using HotelBooking.Domain.Entities.Rooms;
 
