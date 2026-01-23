@@ -26,6 +26,7 @@ namespace HotelBooking.Presentation.Controllers
         }
 
         protected string GetEmailFromToken() => User.FindFirstValue(ClaimTypes.Email)!;
+        protected string GetUserIdFromToken() => User.FindFirstValue(ClaimTypes.NameIdentifier)!;
 
         private ActionResult HandleProblem(IReadOnlyList<Error> errors)
         {

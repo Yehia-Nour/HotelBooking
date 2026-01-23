@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -88,22 +89,6 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentBatches",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    PaymentMethod = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PaymentBatches", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RefundMethods",
                 columns: table => new
                 {
@@ -115,6 +100,23 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RefundMethods", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reservations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    TotalCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    NumberOfNights = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -292,6 +294,59 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cancellations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CancellationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Reason = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    CancellationFee = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    CancellationStatus = table.Column<int>(type: "int", nullable: false),
+                    ReservationID = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    ModifiedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cancellations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cancellations_Reservations_ReservationID",
+                        column: x => x.ReservationID,
+                        principalTable: "Reservations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ReservationID = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    GST = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PaymentStatus = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    FailureReason = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Payments_Reservations_ReservationID",
+                        column: x => x.ReservationID,
+                        principalTable: "Reservations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoomAmenities",
                 columns: table => new
                 {
@@ -384,60 +439,63 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reservations",
+                name: "Refunds",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BookingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NumberOfGuests = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RoomID = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    RefundAmount = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    RefundReason = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    RefundStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    RefundDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
+                    ProcessedByUserID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RefundMethodID = table.Column<int>(type: "int", nullable: false),
+                    PaymentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservations", x => x.Id);
-                    table.CheckConstraint("CHK_CheckOutDate", "CheckOutDate > CheckInDate");
+                    table.PrimaryKey("PK_Refunds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservations_Rooms_RoomID",
-                        column: x => x.RoomID,
-                        principalTable: "Rooms",
+                        name: "FK_Refunds_Payments_PaymentID",
+                        column: x => x.PaymentID,
+                        principalTable: "Payments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Refunds_RefundMethods_RefundMethodID",
+                        column: x => x.RefundMethodID,
+                        principalTable: "RefundMethods",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cancellations",
+                name: "ReservationRooms",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CancellationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Reason = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    CancellationFee = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    CancellationStatus = table.Column<int>(type: "int", nullable: false),
                     ReservationID = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    RoomID = table.Column<int>(type: "int", nullable: false),
+                    CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cancellations", x => x.Id);
+                    table.PrimaryKey("PK_ReservationRooms", x => x.Id);
+                    table.CheckConstraint("CHK_ResRoomDates", "[CheckOutDate] > [CheckInDate]");
                     table.ForeignKey(
-                        name: "FK_Cancellations_Reservations_ReservationID",
+                        name: "FK_ReservationRooms_Reservations_ReservationID",
                         column: x => x.ReservationID,
                         principalTable: "Reservations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReservationRooms_Rooms_RoomID",
+                        column: x => x.RoomID,
+                        principalTable: "Rooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -467,32 +525,34 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                         column: x => x.ReservationID,
                         principalTable: "Reservations",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
+                name: "PaymentDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    ReservationID = table.Column<int>(type: "int", nullable: false),
-                    PaymentBatchID = table.Column<int>(type: "int", nullable: false)
+                    PaymentID = table.Column<int>(type: "int", nullable: false),
+                    ReservationRoomID = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    NumberOfNights = table.Column<int>(type: "int", nullable: false),
+                    GST = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(10,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payments", x => x.Id);
+                    table.PrimaryKey("PK_PaymentDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payments_PaymentBatches_PaymentBatchID",
-                        column: x => x.PaymentBatchID,
-                        principalTable: "PaymentBatches",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_PaymentDetails_Payments_PaymentID",
+                        column: x => x.PaymentID,
+                        principalTable: "Payments",
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Payments_Reservations_ReservationID",
-                        column: x => x.ReservationID,
-                        principalTable: "Reservations",
+                        name: "FK_PaymentDetails_ReservationRooms_ReservationRoomID",
+                        column: x => x.ReservationRoomID,
+                        principalTable: "ReservationRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -503,7 +563,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ReservationID = table.Column<int>(type: "int", nullable: false),
+                    ReservationRoomID = table.Column<int>(type: "int", nullable: false),
                     GuestID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -513,43 +573,11 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                         name: "FK_ReservationGuests_Guests_GuestID",
                         column: x => x.GuestID,
                         principalTable: "Guests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ReservationGuests_Reservations_ReservationID",
-                        column: x => x.ReservationID,
-                        principalTable: "Reservations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Refunds",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RefundAmount = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    RefundReason = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    RefundStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    RefundDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
-                    ProcessedByUserID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RefundMethodID = table.Column<int>(type: "int", nullable: false),
-                    PaymentID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Refunds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Refunds_Payments_PaymentID",
-                        column: x => x.PaymentID,
-                        principalTable: "Payments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Refunds_RefundMethods_RefundMethodID",
-                        column: x => x.RefundMethodID,
-                        principalTable: "RefundMethods",
+                        name: "FK_ReservationGuests_ReservationRooms_ReservationRoomID",
+                        column: x => x.ReservationRoomID,
+                        principalTable: "ReservationRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -607,7 +635,8 @@ namespace HotelBooking.Infrastructure.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ReservationID",
                 table: "Feedbacks",
-                column: "ReservationID");
+                column: "ReservationID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Guests_CountryID",
@@ -620,9 +649,14 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 column: "StateID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_PaymentBatchID",
-                table: "Payments",
-                column: "PaymentBatchID");
+                name: "IX_PaymentDetails_PaymentID",
+                table: "PaymentDetails",
+                column: "PaymentID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PaymentDetails_ReservationRoomID",
+                table: "PaymentDetails",
+                column: "ReservationRoomID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_ReservationID",
@@ -655,13 +689,18 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 column: "GuestID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReservationGuests_ReservationID",
+                name: "IX_ReservationGuests_ReservationRoomID",
                 table: "ReservationGuests",
+                column: "ReservationRoomID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReservationRooms_ReservationID",
+                table: "ReservationRooms",
                 column: "ReservationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_RoomID",
-                table: "Reservations",
+                name: "IX_ReservationRooms_RoomID",
+                table: "ReservationRooms",
                 column: "RoomID");
 
             migrationBuilder.CreateIndex(
@@ -721,6 +760,9 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
+                name: "PaymentDetails");
+
+            migrationBuilder.DropTable(
                 name: "RefreshTokens");
 
             migrationBuilder.DropTable(
@@ -748,16 +790,16 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                 name: "Guests");
 
             migrationBuilder.DropTable(
+                name: "ReservationRooms");
+
+            migrationBuilder.DropTable(
                 name: "Amenities");
 
             migrationBuilder.DropTable(
-                name: "PaymentBatches");
+                name: "States");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
-
-            migrationBuilder.DropTable(
-                name: "States");
 
             migrationBuilder.DropTable(
                 name: "Rooms");

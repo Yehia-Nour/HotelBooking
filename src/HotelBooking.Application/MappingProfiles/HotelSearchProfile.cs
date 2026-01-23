@@ -11,9 +11,11 @@ namespace HotelBooking.Application.MappingProfiles
             CreateMap<RoomType, RoomTypeSearchDTO>();
 
             CreateMap<Room, RoomSearchDTO>()
-                .ForMember(d => d.Status, opt => opt.MapFrom(s => s.Status.ToString()));
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
 
-            CreateMap<Amenity, AmenitySearchDTO>();
+            CreateMap<RoomAmenity, AmenitySearchDTO>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Amenity.Name))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Amenity.Description));
 
             CreateMap<RoomType, RoomTypeSearchWithAmenitiesDTO>()
                 .ForMember(dest => dest.Amenities, opt => opt.MapFrom(src => src.RoomAmenities.Select(ra => ra.Amenity)));

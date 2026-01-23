@@ -3,7 +3,7 @@ using HotelBooking.Application.Features.HotelSearch.Queries.Requests;
 
 namespace HotelBooking.Application.Features.HotelSearch.Queries.Validators
 {
-    internal class SearchRoomsByMinRatingQueryValidator : AbstractValidator<SearchRoomsByMinRatingQuery>
+    public class SearchRoomsByMinRatingQueryValidator : AbstractValidator<SearchRoomsByMinRatingQuery>
     {
         public SearchRoomsByMinRatingQueryValidator()
         {

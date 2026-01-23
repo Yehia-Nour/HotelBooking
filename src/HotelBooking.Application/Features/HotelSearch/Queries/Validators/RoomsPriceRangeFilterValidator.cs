@@ -3,7 +3,7 @@ using HotelBooking.Application.Features.HotelSearch.Queries.Requests;
 
 namespace HotelBooking.Application.Features.HotelSearch.Queries.Validators
 {
-    internal class RoomsPriceRangeFilterValidator : AbstractValidator<RoomsPriceRangeFilter>
+    public class RoomsPriceRangeFilterValidator : AbstractValidator<RoomsPriceRangeFilter>
     {
         public RoomsPriceRangeFilterValidator()
         {

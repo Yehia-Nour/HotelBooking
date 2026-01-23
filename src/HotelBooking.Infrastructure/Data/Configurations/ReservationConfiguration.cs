@@ -8,14 +8,14 @@ namespace HotelBooking.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Reservation> builder)
         {
-            builder.Property(r => r.CreatedBy).HasMaxLength(100);
-            builder.Property(r => r.CreatedDate).HasDefaultValueSql("GETDATE()");
+            builder.HasMany(r => r.ReservationRooms)
+                   .WithOne(rr => rr.Reservation)
+                   .HasForeignKey(rr => rr.ReservationID)
+                   .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(r => r.ModifiedBy).HasMaxLength(100);
-
-            builder.ToTable(t => t
-                .HasCheckConstraint("CHK_CheckOutDate", "CheckOutDate > CheckInDate")
-            );
+            builder.HasMany(r => r.Payments)
+                   .WithOne(p => p.Reservation)
+                   .HasForeignKey(p => p.ReservationID);
         }
     }
 }

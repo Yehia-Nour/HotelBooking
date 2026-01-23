@@ -24,7 +24,8 @@ namespace HotelBooking.Infrastructure.Identity.Security
             var claims = new List<Claim>
             {
                 new (JwtRegisteredClaimNames.Email, user.Email!),
-                new (JwtRegisteredClaimNames.Name, user.UserName!)
+                new (JwtRegisteredClaimNames.Name, user.UserName!),
+                new (ClaimTypes.NameIdentifier, user.Id)
             };
 
             var roles = await _userManager.GetRolesAsync(user);
