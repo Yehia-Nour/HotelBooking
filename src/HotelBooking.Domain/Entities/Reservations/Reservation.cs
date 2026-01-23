@@ -1,25 +1,24 @@
 ﻿using HotelBooking.Domain.Entities.Common;
 using HotelBooking.Domain.Entities.Payments;
-using HotelBooking.Domain.Entities.Rooms;
 
 namespace HotelBooking.Domain.Entities.Reservations
 {
-    public class Reservation : AuditableEntity
+    public class Reservation : BaseEntity
     {
         public DateTime BookingDate { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-        public int NumberOfGuests { get; set; }
-        public ReservationStatus Status { get; set; } = default!;
+
+        public ReservationStatus Status { get; set; }
+
+        public decimal TotalCost { get; set; }
+        public int NumberOfNights { get; set; }
 
         public string UserID { get; set; } = default!;
 
-        public int RoomID { get; set; }
-        public Room Room { get; set; } = default!;
-
         public Feedback? Feedback { get; set; }
 
-        public ICollection<ReservationGuest> ReservationGuests { get; set; } = default!;
-        public ICollection<Payment> Payments { get; set; } = default!;
+        public ICollection<ReservationRoom> ReservationRooms { get; set; } = [];
+        public ICollection<Payment> Payments { get; set; } = [];
     }
 }

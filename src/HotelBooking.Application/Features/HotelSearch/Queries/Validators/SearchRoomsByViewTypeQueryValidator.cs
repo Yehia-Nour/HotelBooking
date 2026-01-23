@@ -4,7 +4,7 @@ using HotelBooking.Application.Validators;
 
 namespace HotelBooking.Application.Features.HotelSearch.Queries.Validators
 {
-    internal class SearchRoomsByViewTypeQueryValidator : AbstractValidator<SearchRoomsByViewTypeQuery>
+    public class SearchRoomsByViewTypeQueryValidator : AbstractValidator<SearchRoomsByViewTypeQuery>
     {
         public SearchRoomsByViewTypeQueryValidator()
         {

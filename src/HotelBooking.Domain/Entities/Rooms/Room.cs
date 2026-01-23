@@ -15,6 +15,6 @@ namespace HotelBooking.Domain.Entities.Rooms
         public int RoomTypeID { get; set; }
         public RoomType RoomType { get; set; } = default!;
 
-        public ICollection<Reservation> Reservations { get; set; } = default!;
+        public ICollection<ReservationRoom> ReservationRooms { get; set; } = [];
     }
 }

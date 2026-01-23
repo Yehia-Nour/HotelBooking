@@ -189,25 +189,40 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<decimal>("Amount")
-                        .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<int>("PaymentBatchID")
-                        .HasColumnType("int");
+                    b.Property<string>("FailureReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("GST")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentStatus")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("ReservationID")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(10,2)");
 
-                    b.HasIndex("PaymentBatchID");
+                    b.HasKey("Id");
 
                     b.HasIndex("ReservationID");
 
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.PaymentBatch", b =>
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.PaymentDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -215,25 +230,31 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("TotalAmount")
-                        .HasPrecision(10, 2)
+                    b.Property<decimal>("Amount")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("UserID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("GST")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("NumberOfNights")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationRoomID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(10,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentBatches");
+                    b.HasIndex("PaymentID");
+
+                    b.HasIndex("ReservationRoomID");
+
+                    b.ToTable("PaymentDetails");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.Refund", b =>
@@ -402,37 +423,14 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CheckInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CheckOutDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NumberOfGuests")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoomID")
+                    b.Property<int>("NumberOfNights")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("TotalCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserID")
                         .IsRequired()
@@ -440,12 +438,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomID");
-
-                    b.ToTable("Reservations", t =>
-                        {
-                            t.HasCheckConstraint("CHK_CheckOutDate", "CheckOutDate > CheckInDate");
-                        });
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.ReservationGuest", b =>
@@ -459,16 +452,48 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Property<int>("GuestID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReservationID")
+                    b.Property<int>("ReservationRoomID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GuestID");
 
-                    b.HasIndex("ReservationID");
+                    b.HasIndex("ReservationRoomID");
 
                     b.ToTable("ReservationGuests");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.ReservationRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CheckInDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOutDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReservationID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationID");
+
+                    b.HasIndex("RoomID");
+
+                    b.ToTable("ReservationRooms", t =>
+                        {
+                            t.HasCheckConstraint("CHK_ResRoomDates", "[CheckOutDate] > [CheckInDate]");
+                        });
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Rooms.Amenity", b =>
@@ -914,21 +939,32 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.Payment", b =>
                 {
-                    b.HasOne("HotelBooking.Domain.Entities.Payments.PaymentBatch", "PaymentBatch")
-                        .WithMany("Payments")
-                        .HasForeignKey("PaymentBatchID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HotelBooking.Domain.Entities.Reservations.Reservation", "Reservation")
                         .WithMany("Payments")
                         .HasForeignKey("ReservationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PaymentBatch");
-
                     b.Navigation("Reservation");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.PaymentDetail", b =>
+                {
+                    b.HasOne("HotelBooking.Domain.Entities.Payments.Payment", "Payment")
+                        .WithMany("PaymentDetails")
+                        .HasForeignKey("PaymentID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HotelBooking.Domain.Entities.Reservations.ReservationRoom", "ReservationRoom")
+                        .WithMany("PaymentDetails")
+                        .HasForeignKey("ReservationRoomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Payment");
+
+                    b.Navigation("ReservationRoom");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.Refund", b =>
@@ -979,34 +1015,42 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Navigation("Reservation");
                 });
 
-            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.Reservation", b =>
-                {
-                    b.HasOne("HotelBooking.Domain.Entities.Rooms.Room", "Room")
-                        .WithMany("Reservations")
-                        .HasForeignKey("RoomID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Room");
-                });
-
             modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.ReservationGuest", b =>
                 {
                     b.HasOne("HotelBooking.Domain.Entities.Guests.Guest", "Guest")
                         .WithMany("ReservationGuests")
                         .HasForeignKey("GuestID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("HotelBooking.Domain.Entities.Reservations.Reservation", "Reservation")
+                    b.HasOne("HotelBooking.Domain.Entities.Reservations.ReservationRoom", "ReservationRoom")
                         .WithMany("ReservationGuests")
-                        .HasForeignKey("ReservationID")
+                        .HasForeignKey("ReservationRoomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Guest");
 
+                    b.Navigation("ReservationRoom");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.ReservationRoom", b =>
+                {
+                    b.HasOne("HotelBooking.Domain.Entities.Reservations.Reservation", "Reservation")
+                        .WithMany("ReservationRooms")
+                        .HasForeignKey("ReservationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelBooking.Domain.Entities.Rooms.Room", "Room")
+                        .WithMany("ReservationRooms")
+                        .HasForeignKey("RoomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Reservation");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Rooms.Room", b =>
@@ -1111,9 +1155,9 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Navigation("ReservationGuests");
                 });
 
-            modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.PaymentBatch", b =>
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.Payment", b =>
                 {
-                    b.Navigation("Payments");
+                    b.Navigation("PaymentDetails");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.Reservation", b =>
@@ -1121,6 +1165,13 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Navigation("Feedback");
 
                     b.Navigation("Payments");
+
+                    b.Navigation("ReservationRooms");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.ReservationRoom", b =>
+                {
+                    b.Navigation("PaymentDetails");
 
                     b.Navigation("ReservationGuests");
                 });
@@ -1132,7 +1183,7 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Rooms.Room", b =>
                 {
-                    b.Navigation("Reservations");
+                    b.Navigation("ReservationRooms");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Rooms.RoomType", b =>

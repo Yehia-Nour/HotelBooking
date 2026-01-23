@@ -10,10 +10,11 @@ namespace HotelBooking.Application.Specifications.ReservationSpecifications
 
         private ReservationCriteriaSpecification(Expression<Func<Reservation, bool>> criteria)
             => Criteria = criteria;
-
         public static ReservationCriteriaSpecification ByRoomId(int roomId)
-            => new(r => r.RoomID == roomId &&
-                        (r.Status == ReservationStatus.Reserved ||
-                         r.Status == ReservationStatus.CheckedIn));
+            => new(r =>
+                r.ReservationRooms.Any(rr => rr.RoomID == roomId)
+                && (r.Status == ReservationStatus.Reserved
+                    || r.Status == ReservationStatus.CheckedIn)
+            );
     }
 }

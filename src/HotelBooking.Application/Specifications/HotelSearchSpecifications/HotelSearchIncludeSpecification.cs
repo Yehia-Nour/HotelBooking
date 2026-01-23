@@ -13,13 +13,5 @@ namespace HotelBooking.Application.Specifications.HotelSearchSpecifications
 
         public static HotelSearchIncludeSpecification RoomType()
             => new(new List<Expression<Func<Room, object>>> { ra => ra.RoomType });
-
-        public static HotelSearchIncludeSpecification RoomTypeWithAmenities()
-            => new(new List<Expression<Func<Room, object>>>
-            {
-            r => r.RoomType,
-            r => r.RoomType.RoomAmenities,
-            r => r.RoomType.RoomAmenities.Select(ra => ra.Amenity)
-            });
     }
 }

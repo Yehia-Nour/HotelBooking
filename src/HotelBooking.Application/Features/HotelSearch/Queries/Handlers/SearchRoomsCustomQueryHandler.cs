@@ -24,7 +24,7 @@ namespace HotelBooking.Application.Features.HotelSearch.Queries.Handlers
         {
             var criteriaSpec = HotelSearchCriteriaSpecification.ByCustomFilter(request.Filter);
 
-            var includeSpec = HotelSearchIncludeSpecification.RoomTypeWithAmenities();
+            var includeSpec = HotelSearchIncludeSpecification.RoomType();
 
             var rooms = await _unitOfWork.GetRepository<Room>().GetAllAsync([criteriaSpec, includeSpec]);
 
