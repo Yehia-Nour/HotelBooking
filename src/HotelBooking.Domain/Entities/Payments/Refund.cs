@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Domain.Entities.Common;
+using HotelBooking.Domain.Entities.Reservations;
 
 namespace HotelBooking.Domain.Entities.Payments
 {
@@ -6,8 +7,10 @@ namespace HotelBooking.Domain.Entities.Payments
     {
         public decimal RefundAmount { get; set; }
         public string RefundReason { get; set; } = default!;
-        public string RefundStatus { get; set; } = default!;
+        public RefundStatus RefundStatus { get; set; } = default!;
         public DateTime RefundDate { get; set; }
+        public decimal CancellationCharge { get; set; }
+        public decimal? NetRefundAmount { get; set; }
 
         public string ProcessedByUserID { get; set; } = default!;
 
@@ -16,5 +19,8 @@ namespace HotelBooking.Domain.Entities.Payments
 
         public int PaymentID { get; set; }
         public Payment Payment { get; set; } = default!;
+
+        public int? CancellationRequestId { get; set; }
+        public CancellationRequest? CancellationRequest { get; set; }
     }
 }

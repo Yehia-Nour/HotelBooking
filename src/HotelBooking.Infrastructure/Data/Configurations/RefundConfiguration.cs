@@ -15,6 +15,23 @@ namespace HotelBooking.Infrastructure.Data.Configurations
             builder.Property(r => r.RefundDate).HasDefaultValueSql("GETDATE()");
 
             builder.Property(r => r.RefundStatus).HasMaxLength(50);
+
+            builder.Property(x => x.NetRefundAmount).HasPrecision(10, 2);
+
+            builder.HasOne(x => x.Payment)
+                   .WithMany()
+                   .HasForeignKey(x => x.PaymentID)
+                   .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(x => x.RefundMethod)
+                   .WithMany()
+                   .HasForeignKey(x => x.RefundMethodID)
+                   .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(x => x.CancellationRequest)
+                   .WithMany(x => x.Refunds)
+                   .HasForeignKey(x => x.CancellationRequestId)
+                   .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

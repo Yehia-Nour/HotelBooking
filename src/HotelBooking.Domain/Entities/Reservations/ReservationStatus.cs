@@ -5,6 +5,7 @@
         Reserved,
         CheckedIn,
         CheckedOut,
-        Cancelled
+        Cancelled,
+        PartiallyCancelled
     }
 }

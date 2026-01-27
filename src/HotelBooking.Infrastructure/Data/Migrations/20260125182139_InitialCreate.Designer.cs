@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBooking.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(HotelBookingDbContext))]
-    [Migration("20260113095648_InitialCreate")]
+    [Migration("20260125182139_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -268,6 +268,16 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("CancellationCharge")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("CancellationRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("NetRefundAmount")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
                     b.Property<int>("PaymentID")
                         .HasColumnType("int");
 
@@ -299,6 +309,8 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CancellationRequestId");
+
                     b.HasIndex("PaymentID");
 
                     b.HasIndex("RefundMethodID");
@@ -327,7 +339,41 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.ToTable("RefundMethods");
                 });
 
-            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.Cancellation", b =>
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationCharge", b =>
+                {
+                    b.Property<int>("CancellationRequestId")
+                        .HasColumnType("int")
+                        .HasColumnName("CancellationRequestID");
+
+                    b.Property<decimal?>("CancellationChargeAmount")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<decimal?>("CancellationPercentage")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("MinimumCharge")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("PolicyDescription")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<decimal?>("TotalCost")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("CancellationRequestId");
+
+                    b.ToTable("CancellationCharges");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -335,15 +381,74 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CancellationDate")
+                    b.Property<int?>("CancellationRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReservationRoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CancellationRequestId");
+
+                    b.HasIndex("ReservationRoomId");
+
+                    b.ToTable("CancellationDetails");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationPolicy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal?>("CancellationChargePercentage")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime?>("EffectiveFromDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal>("CancellationFee")
+                    b.Property<DateTime?>("EffectiveToDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("MinimumCharge")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
 
+                    b.HasKey("Id");
+
+                    b.ToTable("CancellationPolicies");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AdminReviewedById")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CancellationReason")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<int>("CancellationStatus")
                         .HasColumnType("int");
+
+                    b.Property<string>("CancellationType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -362,20 +467,27 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<DateTime>("RequestedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int>("ReservationID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ReservationID")
                         .IsUnique();
 
-                    b.ToTable("Cancellations");
+                    b.ToTable("CancellationRequests");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.Feedback", b =>
@@ -424,6 +536,12 @@ namespace HotelBooking.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("BookingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckInDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOutDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("NumberOfNights")
@@ -972,28 +1090,63 @@ namespace HotelBooking.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.Refund", b =>
                 {
+                    b.HasOne("HotelBooking.Domain.Entities.Reservations.CancellationRequest", "CancellationRequest")
+                        .WithMany("Refunds")
+                        .HasForeignKey("CancellationRequestId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("HotelBooking.Domain.Entities.Payments.Payment", "Payment")
                         .WithMany()
                         .HasForeignKey("PaymentID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("HotelBooking.Domain.Entities.Payments.RefundMethod", "RefundMethod")
                         .WithMany()
                         .HasForeignKey("RefundMethodID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("CancellationRequest");
 
                     b.Navigation("Payment");
 
                     b.Navigation("RefundMethod");
                 });
 
-            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.Cancellation", b =>
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationCharge", b =>
+                {
+                    b.HasOne("HotelBooking.Domain.Entities.Reservations.CancellationRequest", "CancellationRequest")
+                        .WithOne("CancellationCharge")
+                        .HasForeignKey("HotelBooking.Domain.Entities.Reservations.CancellationCharge", "CancellationRequestId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CancellationRequest");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationDetail", b =>
+                {
+                    b.HasOne("HotelBooking.Domain.Entities.Reservations.CancellationRequest", "CancellationRequest")
+                        .WithMany("CancellationDetails")
+                        .HasForeignKey("CancellationRequestId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HotelBooking.Domain.Entities.Reservations.ReservationRoom", "ReservationRoom")
+                        .WithMany()
+                        .HasForeignKey("ReservationRoomId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("CancellationRequest");
+
+                    b.Navigation("ReservationRoom");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationRequest", b =>
                 {
                     b.HasOne("HotelBooking.Domain.Entities.Reservations.Reservation", "Reservation")
                         .WithOne()
-                        .HasForeignKey("HotelBooking.Domain.Entities.Reservations.Cancellation", "ReservationID")
+                        .HasForeignKey("HotelBooking.Domain.Entities.Reservations.CancellationRequest", "ReservationID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -1161,6 +1314,16 @@ namespace HotelBooking.Infrastructure.Data.Migrations
             modelBuilder.Entity("HotelBooking.Domain.Entities.Payments.Payment", b =>
                 {
                     b.Navigation("PaymentDetails");
+                });
+
+            modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.CancellationRequest", b =>
+                {
+                    b.Navigation("CancellationCharge")
+                        .IsRequired();
+
+                    b.Navigation("CancellationDetails");
+
+                    b.Navigation("Refunds");
                 });
 
             modelBuilder.Entity("HotelBooking.Domain.Entities.Reservations.Reservation", b =>

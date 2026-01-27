@@ -13,5 +13,8 @@ namespace HotelBooking.Application.Specifications.HotelBookingSpecifications
 
         public static HotelBookingPaymentCriteriaSpecification ById(int paymentId)
             => new(p => p.Id == paymentId);
+
+        public static HotelBookingPaymentCriteriaSpecification ByReservationId(int reservationId)
+            => new(p => p.ReservationID == reservationId);
     }
 }
