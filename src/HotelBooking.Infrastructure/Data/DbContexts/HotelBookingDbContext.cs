@@ -26,7 +26,7 @@ namespace HotelBooking.Infrastructure.Data.DbContexts
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Refund> Refunds { get; set; }
         public DbSet<RefundMethod> RefundMethods { get; set; }
-        public DbSet<Cancellation> Cancellations { get; set; }
+        public DbSet<CancellationRequest> CancellationRequests { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ReservationGuest> ReservationGuests { get; set; }
@@ -37,5 +37,8 @@ namespace HotelBooking.Infrastructure.Data.DbContexts
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<ReservationRoom> ReservationRooms { get; set; }
         public DbSet<PaymentDetail> PaymentDetails { get; set; }
+        public DbSet<CancellationPolicy> CancellationPolicies { get; set; }
+        public DbSet<CancellationDetail> CancellationDetails { get; set; }
+        public DbSet<CancellationCharge> CancellationCharges { get; set; }
     }
 }

@@ -38,8 +38,17 @@ namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
                 var hasRoomAmenities = await _dbContext.RoomAmenities.AnyAsync();
                 var hasRooms = await _dbContext.Rooms.AnyAsync();
                 var hasStates = await _dbContext.States.AnyAsync();
+                var hasCancellationPolicie = await _dbContext.CancellationPolicies.AnyAsync();
 
-                if (hasAmenities && hasCountries && hasRefundMethods && hasRoomTypes && hasRoomAmenities && hasRooms && hasStates) return;
+                if (hasAmenities
+                    && hasCountries
+                    && hasRefundMethods
+                    && hasRoomTypes
+                    && hasRoomAmenities
+                    && hasRooms
+                    && hasStates
+                    && hasCancellationPolicie)
+                    return;
 
                 if (!hasAmenities)
                 {
@@ -83,6 +92,12 @@ namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
                 {
                     await SeedJsonFile("States.json", _dbContext.States);
                     _logger.LogInformation("Seeding States completed.");
+                }
+
+                if (!hasCancellationPolicie)
+                {
+                    await SeedJsonFile("CancellationPolicies.json", _dbContext.CancellationPolicies);
+                    _logger.LogInformation("Seeding CancellationPolicies completed.");
                 }
 
                 await _dbContext.SaveChangesAsync();

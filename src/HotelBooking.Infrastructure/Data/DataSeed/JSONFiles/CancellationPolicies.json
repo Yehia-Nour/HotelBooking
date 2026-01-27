@@ -1,0 +1,37 @@
+[
+  {
+    "Description": "No charge if cancelled more than 30 days before check-in",
+    "CancellationChargePercentage": 0,
+    "MinimumCharge": 0,
+    "EffectiveFromDate": "2024-01-01",
+    "EffectiveToDate": "2024-12-31"
+  },
+  {
+    "Description": "10% charge if cancelled between 15 and 30 days before check-in",
+    "CancellationChargePercentage": 10,
+    "MinimumCharge": 0,
+    "EffectiveFromDate": "2024-01-01",
+    "EffectiveToDate": "2024-12-31"
+  },
+  {
+    "Description": "25% charge if cancelled between 7 and 14 days before check-in",
+    "CancellationChargePercentage": 25,
+    "MinimumCharge": 0,
+    "EffectiveFromDate": "2024-01-01",
+    "EffectiveToDate": "2024-12-31"
+  },
+  {
+    "Description": "50% charge if cancelled less than 7 days before check-in",
+    "CancellationChargePercentage": 50,
+    "MinimumCharge": 0,
+    "EffectiveFromDate": "2024-01-01",
+    "EffectiveToDate": "2024-12-31"
+  },
+  {
+    "Description": "100% charge for any cancellation during high season",
+    "CancellationChargePercentage": 100,
+    "MinimumCharge": 0,
+    "EffectiveFromDate": "2024-08-01",
+    "EffectiveToDate": "2024-08-31"
+  }
+]

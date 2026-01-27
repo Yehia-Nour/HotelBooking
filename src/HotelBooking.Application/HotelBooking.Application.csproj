@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Features\Refunds\Queries\Requests\GetCancellationsForRefundQuery.cs~RF2e5c448c.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <PackageReference Include="MediatR" Version="14.0.0" />
@@ -23,7 +27,6 @@
     <Folder Include="Features\NewFolder - Copy\Commands\Validators\" />
     <Folder Include="Features\NewFolder - Copy\Queries\Handlers\" />
     <Folder Include="Features\NewFolder - Copy\Queries\Requests\" />
-    <Folder Include="Services\Implementations\" />
   </ItemGroup>
 
 </Project>
