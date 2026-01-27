@@ -22,7 +22,7 @@ namespace HotelBooking.Application.Features.Feedbacks.Queries.Handlers
         public async Task<Result<IEnumerable<FeedbackDTO>>> Handle(GetAllFeedbacksQuery request, CancellationToken cancellationToken)
         {
             var repo = _unitOfWork.GetRepository<Feedback>();
-            var all = await repo.GetAllAsync([]);
+            var all = await repo.GetAllAsync();
 
             var dtos = _mapper.Map<List<FeedbackDTO>>(all);
             return dtos;

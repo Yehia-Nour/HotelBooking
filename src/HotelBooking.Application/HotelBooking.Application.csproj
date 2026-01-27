@@ -21,12 +21,4 @@
     <ProjectReference Include="..\HotelBooking.Domain\HotelBooking.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\CancellationPolicies\Commands\Handlers\" />
-    <Folder Include="Features\CancellationPolicies\Commands\Requests\" />
-    <Folder Include="Features\CancellationPolicies\Commands\Validators\" />
-    <Folder Include="Features\CancellationPolicies\Queries\Handlers\" />
-    <Folder Include="Features\CancellationPolicies\Queries\Requests\" />
-  </ItemGroup>
-
 </Project>
