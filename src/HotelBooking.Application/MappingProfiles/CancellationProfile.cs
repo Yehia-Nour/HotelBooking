@@ -11,6 +11,8 @@ namespace HotelBooking.Application.MappingProfiles
             CreateMap<CancellationPolicy, CancellationPolicyDTO>();
 
             CreateMap<CancellationRequest, CancellationRequestListItemDTO>();
+
+            //CreateMap<CreateCancellationPolicyCommand, CancellationPolicy>();
         }
     }
 }
