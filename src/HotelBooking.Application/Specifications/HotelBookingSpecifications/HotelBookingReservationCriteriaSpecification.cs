@@ -13,5 +13,8 @@ namespace HotelBooking.Application.Specifications.HotelBookingSpecifications
 
         public static HotelBookingReservationCriteriaSpecification ById(int reservationId)
             => new(r => r.Id == reservationId);
+
+        public static HotelBookingReservationCriteriaSpecification ByIdForUser(int id, string userId)
+            => new(r => r.Id == id && r.UserID == userId);
     }
 }

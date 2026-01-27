@@ -21,12 +21,4 @@
     <ProjectReference Include="..\HotelBooking.Domain\HotelBooking.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\NewFolder - Copy\Commands\Handlers\" />
-    <Folder Include="Features\NewFolder - Copy\Commands\Requests\" />
-    <Folder Include="Features\NewFolder - Copy\Commands\Validators\" />
-    <Folder Include="Features\NewFolder - Copy\Queries\Handlers\" />
-    <Folder Include="Features\NewFolder - Copy\Queries\Requests\" />
-  </ItemGroup>
-
 </Project>
