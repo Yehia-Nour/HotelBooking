@@ -1,8 +1,3 @@
-﻿using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
-using Microsoft.Extensions.Logging;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
 {
     public class JsonFileReader : IJsonFileReader

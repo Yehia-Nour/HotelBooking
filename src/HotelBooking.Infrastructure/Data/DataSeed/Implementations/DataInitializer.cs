@@ -1,11 +1,3 @@
-﻿using HotelBooking.Application.Interfaces;
-using HotelBooking.Domain.Entities.Common;
-using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
-using HotelBooking.Infrastructure.Data.DbContexts;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
-
 namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
 {
     public class DataInitializer : IDataInitializer

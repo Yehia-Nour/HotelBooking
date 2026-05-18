@@ -1,9 +1,3 @@
-﻿using HotelBooking.Application.Interfaces.Repositories;
-using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Common;
-using HotelBooking.Infrastructure.Data.DbContexts;
-using Microsoft.EntityFrameworkCore;
-
 namespace HotelBooking.Infrastructure.Implementations.Repositories
 {
     internal class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity

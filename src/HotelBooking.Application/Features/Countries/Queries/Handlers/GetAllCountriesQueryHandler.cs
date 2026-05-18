@@ -1,12 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.CountryDTOs;
-using HotelBooking.Application.Features.Countries.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.CountrySpecifications;
-using HotelBooking.Domain.Entities.Geography;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Countries.Queries.Handlers
 {
     public class GetAllCountriesQueryHandler

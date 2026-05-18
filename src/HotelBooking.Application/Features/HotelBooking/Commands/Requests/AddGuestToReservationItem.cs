@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Guests;
-
 namespace HotelBooking.Application.Features.HotelBooking.Commands.Requests
 {
     public class AddGuestToReservationItem

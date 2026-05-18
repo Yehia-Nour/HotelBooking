@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-using HotelBooking.Infrastructure.Data.DataSeed.Interfaces;
-using Microsoft.EntityFrameworkCore;
-
 namespace HotelBooking.Infrastructure.Data.DataSeed.Implementations
 {
     public class DataSeeder : IDataSeeder

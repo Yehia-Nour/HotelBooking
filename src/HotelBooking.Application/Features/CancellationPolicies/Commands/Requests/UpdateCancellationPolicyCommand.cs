@@ -1,6 +1,3 @@
-﻿using HotelBooking.Application.Results;
-using MediatR;
-
 namespace HotelBooking.Application.Features.CancellationPolicies.Commands.Requests
 {
     public class UpdateCancellationPolicyCommand : IRequest<Result>

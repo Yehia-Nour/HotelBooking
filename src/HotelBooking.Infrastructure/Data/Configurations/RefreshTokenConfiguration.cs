@@ -1,7 +1,3 @@
-﻿using HotelBooking.Infrastructure.Identity.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace HotelBooking.Infrastructure.Data.Configurations
 {
     internal class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>

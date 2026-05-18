@@ -1,7 +1,3 @@
-﻿using HotelBooking.Application.Interfaces;
-using HotelBooking.Infrastructure.Data.DbContexts;
-using Microsoft.EntityFrameworkCore;
-
 namespace HotelBooking.Presentation.Extensions
 {
     public static class DatabaseMigrationExtensions

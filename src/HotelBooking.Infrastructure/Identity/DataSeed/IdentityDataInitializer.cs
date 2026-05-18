@@ -1,8 +1,3 @@
-﻿using HotelBooking.Application.Interfaces;
-using HotelBooking.Infrastructure.Identity.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-
 namespace HotelBooking.Infrastructure.Identity.DataSeed
 {
     public class IdentityDataInitializer : IDataInitializer

@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Payments;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace HotelBooking.Infrastructure.Data.Configurations
 {
     internal class PaymentConfiguration : IEntityTypeConfiguration<Payment>

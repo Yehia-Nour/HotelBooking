@@ -1,7 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.Cancellations.Commands.Requests;
-using HotelBooking.Domain.Entities.Reservations;
-
 namespace HotelBooking.Application.Features.Cancellations.Commands.Validators
 {
     public class ReviewCancellationRequestCommandValidator : AbstractValidator<ReviewCancellationRequestCommand>

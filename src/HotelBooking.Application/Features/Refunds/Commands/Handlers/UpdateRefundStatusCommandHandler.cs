@@ -1,9 +1,3 @@
-﻿using HotelBooking.Application.Features.Refunds.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Domain.Entities.Payments;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Refunds.Commands.Handlers
 {
     public class UpdateRefundStatusCommandHandler : IRequestHandler<UpdateRefundStatusWithUserCommand, Result>

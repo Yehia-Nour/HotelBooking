@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-using HotelBooking.Domain.Entities.Geography;
-using HotelBooking.Domain.Entities.Reservations;
-
 namespace HotelBooking.Domain.Entities.Guests
 {
     public class Guest : AuditableEntity

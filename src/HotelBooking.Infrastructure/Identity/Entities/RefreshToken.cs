@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-
 namespace HotelBooking.Infrastructure.Identity.Entities
 {
     public class RefreshToken : BaseEntity

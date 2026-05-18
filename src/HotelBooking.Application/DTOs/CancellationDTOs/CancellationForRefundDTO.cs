@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Reservations;
-
 namespace HotelBooking.Application.DTOs.CancellationDTOs
 {
     public record CancellationForRefundDTO

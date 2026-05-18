@@ -1,12 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.StateDTOs;
-using HotelBooking.Application.Features.States.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.StateSpecifications;
-using HotelBooking.Domain.Entities.Geography;
-using MediatR;
-
 namespace HotelBooking.Application.Features.States.Queries.Handlers
 {
     public class GetAllStatesQueryHandler : IRequestHandler<GetAllStatesQuery, Result<IEnumerable<StateDTO>>>

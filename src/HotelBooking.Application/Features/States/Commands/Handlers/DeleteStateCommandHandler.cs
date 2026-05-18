@@ -1,9 +1,3 @@
-﻿using HotelBooking.Application.Features.States.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Domain.Entities.Geography;
-using MediatR;
-
 namespace HotelBooking.Application.Features.States.Commands.Handlers
 {
     public class DeleteStateCommandHandler : IRequestHandler<DeleteStateCommand, Result>

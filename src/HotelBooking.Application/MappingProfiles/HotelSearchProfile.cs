@@ -1,7 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.HotelSearchDTOs;
-using HotelBooking.Domain.Entities.Rooms;
-
 namespace HotelBooking.Application.MappingProfiles
 {
     internal class HotelSearchProfile : Profile

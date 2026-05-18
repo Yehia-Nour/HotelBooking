@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Common;
-using Microsoft.EntityFrameworkCore;
-
 namespace HotelBooking.Infrastructure
 {
     public static class SpecificationEvaluator

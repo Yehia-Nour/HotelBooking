@@ -1,10 +1,3 @@
-﻿using HotelBooking.Application.DTOs.UserDTOs;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Services.Interfaces;
-using HotelBooking.Infrastructure.Identity.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
 namespace HotelBooking.Infrastructure.Identity
 {
     public class AdminService : IAdminService

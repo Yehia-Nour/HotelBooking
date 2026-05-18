@@ -1,5 +1,3 @@
-﻿using Microsoft.AspNetCore.Identity;
-
 namespace HotelBooking.Infrastructure.Identity.Entities
 {
     public class ApplicationUser : IdentityUser

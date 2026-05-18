@@ -1,6 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.HotelSearch.Queries.Requests;
-
 namespace HotelBooking.Application.Features.HotelSearch.Queries.Validators
 {
     public class RoomsAvailabilityFilterValidator : AbstractValidator<RoomsAvailabilityFilter>

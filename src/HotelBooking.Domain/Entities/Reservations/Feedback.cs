@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-
 namespace HotelBooking.Domain.Entities.Reservations
 {
     public class Feedback : BaseEntity

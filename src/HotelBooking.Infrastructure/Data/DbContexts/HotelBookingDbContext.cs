@@ -1,13 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Geography;
-using HotelBooking.Domain.Entities.Guests;
-using HotelBooking.Domain.Entities.Payments;
-using HotelBooking.Domain.Entities.Reservations;
-using HotelBooking.Domain.Entities.Rooms;
-using HotelBooking.Infrastructure.Identity.Entities;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-
 namespace HotelBooking.Infrastructure.Data.DbContexts
 {
     public class HotelBookingDbContext : IdentityDbContext<ApplicationUser>

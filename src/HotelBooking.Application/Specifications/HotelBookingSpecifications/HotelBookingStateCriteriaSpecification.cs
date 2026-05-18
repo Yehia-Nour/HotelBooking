@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Geography;
-using System.Linq.Expressions;
-
 namespace HotelBooking.Application.Specifications.GeographySpecifications
 {
     public class HotelBookingStateCriteriaSpecification : ICriteriaSpecification<State>

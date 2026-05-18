@@ -1,11 +1,3 @@
-﻿using HotelBooking.Application.DTOs.CancellationDTOs;
-using HotelBooking.Application.Features.Refunds.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.CancellationSpecifications;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Refunds.Queries.Handlers
 {
     public class GetCancellationsForRefundQueryHandler : IRequestHandler<GetCancellationsForRefundQuery, Result<IEnumerable<CancellationForRefundDTO>>>

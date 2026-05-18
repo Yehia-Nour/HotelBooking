@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-using HotelBooking.Domain.Entities.Payments;
-using HotelBooking.Domain.Entities.Rooms;
-
 namespace HotelBooking.Domain.Entities.Reservations
 {
     public class ReservationRoom : BaseEntity

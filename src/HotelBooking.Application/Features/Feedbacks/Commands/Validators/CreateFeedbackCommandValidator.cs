@@ -1,6 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.Feedbacks.Commands.Requests;
-
 namespace HotelBooking.Application.Features.Feedbacks.Commands.Validators
 {
     public class CreateFeedbackCommandValidator : AbstractValidator<CreateFeedbackCommand>

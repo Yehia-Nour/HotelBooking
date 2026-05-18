@@ -1,7 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.Countries.Commands.Requests;
-using HotelBooking.Application.Validators;
-
 namespace HotelBooking.Application.Features.Countries.Commands.Validators
 {
     internal class UpdateCountryValidator : AbstractValidator<UpdateCountryCommand>

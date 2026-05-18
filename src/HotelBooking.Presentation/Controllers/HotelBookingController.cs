@@ -1,10 +1,3 @@
-﻿using HotelBooking.Application.DTOs.HotelBookingDTOs;
-using HotelBooking.Application.Features.HotelBooking.Commands.Requests;
-using HotelBooking.Application.Features.HotelBooking.Queries.Requests;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 namespace HotelBooking.Presentation.Controllers
 {
     [Authorize(Roles = "Admin,Manager,Guest")]

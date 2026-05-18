@@ -1,13 +1,3 @@
-﻿using HotelBooking.Application.DTOs.HotelBookingDTOs;
-using HotelBooking.Application.Features.HotelBooking.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.HotelBookingSpecifications;
-using HotelBooking.Domain.Entities.Rooms;
-using HotelBooking.Domain.Services;
-using HotelBooking.Domain.ValueObjects;
-using MediatR;
-
 public class CalculateRoomCostQueryHandler : IRequestHandler<CalculateRoomCostQuery, Result<RoomCostResultDTO>>
 {
     private readonly IUnitOfWork _unitOfWork;

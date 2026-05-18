@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Reservations;
-
 namespace HotelBooking.Application.Features.Cancellations.Queries.Requests
 {
     public class GetAllCancellationsRequest

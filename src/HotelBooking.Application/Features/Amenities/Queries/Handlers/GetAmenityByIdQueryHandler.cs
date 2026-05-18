@@ -1,11 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.AmenityDTOs;
-using HotelBooking.Application.Features.Amenities.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Domain.Entities.Rooms;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Amenities.Queries.Handlers
 {
     public class GetAmenityByIdQueryHandler : IRequestHandler<GetAmenityByIdQuery, Result<AmenityDTO>>

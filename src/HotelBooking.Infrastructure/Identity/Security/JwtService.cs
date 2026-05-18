@@ -1,11 +1,3 @@
-﻿using HotelBooking.Infrastructure.Identity.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
 namespace HotelBooking.Infrastructure.Identity.Security
 {
     internal class JwtService : IJwtService

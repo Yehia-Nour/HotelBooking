@@ -1,6 +1,3 @@
-﻿using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Common;
-
 namespace HotelBooking.Application.Interfaces.Repositories
 {
     public interface IGenericRepository<TEntity> where TEntity : BaseEntity

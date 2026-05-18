@@ -1,6 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.Cancellations.Queries.Requests;
-
 namespace HotelBooking.Application.Features.Cancellations.Queries.Validators
 {
     public class GetAllCancellationsRequestValidator : AbstractValidator<GetAllCancellationsRequest>
