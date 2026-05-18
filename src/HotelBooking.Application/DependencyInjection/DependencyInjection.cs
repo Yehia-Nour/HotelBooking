@@ -1,8 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Validators.UserValidators;
-using Microsoft.Extensions.DependencyInjection;
-
-
 namespace HotelBooking.Application.DependencyInjection
 {
     public static class DependencyInjection

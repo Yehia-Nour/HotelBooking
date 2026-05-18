@@ -1,9 +1,3 @@
-﻿using HotelBooking.Application.Features.HotelSearch.Queries.Requests;
-using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Reservations;
-using HotelBooking.Domain.Entities.Rooms;
-using System.Linq.Expressions;
-
 namespace HotelBooking.Application.Specifications.HotelSearchSpecifications
 {
     internal class HotelSearchCriteriaSpecification : ICriteriaSpecification<Room>

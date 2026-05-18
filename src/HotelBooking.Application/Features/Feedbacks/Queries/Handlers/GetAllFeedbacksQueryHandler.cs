@@ -1,11 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.FeedbackDTOs;
-using HotelBooking.Application.Features.Feedbacks.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Feedbacks.Queries.Handlers
 {
     public class GetAllFeedbacksQueryHandler : IRequestHandler<GetAllFeedbacksQuery, Result<IEnumerable<FeedbackDTO>>>

@@ -1,8 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.CountryDTOs;
-using HotelBooking.Application.Features.Countries.Commands.Requests;
-using HotelBooking.Domain.Entities.Geography;
-
 namespace HotelBooking.Application.MappingProfiles
 {
     internal class CountryProfile : Profile

@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-
 namespace HotelBooking.Domain.Entities.Rooms
 {
     public class RoomAmenity : BaseEntity

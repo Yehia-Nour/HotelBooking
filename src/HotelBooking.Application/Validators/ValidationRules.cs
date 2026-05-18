@@ -1,5 +1,3 @@
-﻿using FluentValidation;
-
 namespace HotelBooking.Application.Validators
 {
 

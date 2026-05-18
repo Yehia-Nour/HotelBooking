@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.ValueObjects;
-
 namespace HotelBooking.Domain.Services
 {
     public static class TaxCalculator

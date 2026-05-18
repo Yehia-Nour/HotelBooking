@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Reservations;
-
 namespace HotelBooking.Application.Features.Cancellations.Commands.Requests
 {
     public class ReviewCancellationRequestCommand

@@ -1,5 +1,3 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
 namespace HotelBooking.Presentation.Factories
 {
     public static class ApiResponseFactory

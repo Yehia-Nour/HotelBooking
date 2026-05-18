@@ -1,10 +1,3 @@
-﻿using HotelBooking.Application.Features.Feedbacks.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.FeedbackSpecifications;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Feedbacks.Commands.Handlers
 {
     public class DeleteFeedbackCommandHandler : IRequestHandler<DeleteFeedbackWithUserCommand, Result>

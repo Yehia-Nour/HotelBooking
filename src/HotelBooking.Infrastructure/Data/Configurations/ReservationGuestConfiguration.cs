@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Reservations;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace HotelBooking.Infrastructure.Data.Configurations
 {
     public class ReservationGuestConfiguration : IEntityTypeConfiguration<ReservationGuest>

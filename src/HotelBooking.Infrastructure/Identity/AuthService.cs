@@ -1,19 +1,12 @@
-﻿using HotelBooking.Application.DTOs.UserDTOs;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Services.Interfaces;
-using HotelBooking.Infrastructure.Identity.Entities;
-using HotelBooking.Infrastructure.Identity.Security;
-using Microsoft.AspNetCore.Identity;
-
 namespace HotelBooking.Infrastructure.Identity
 {
-    public class AuthenticationService : IAuthenticationService
+    public class AuthService : IAuthService
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IRefreshTokenService _refreshTokenService;
         private readonly IJwtService _jwtService;
 
-        public AuthenticationService(UserManager<ApplicationUser> userManager,
+        public AuthService(UserManager<ApplicationUser> userManager,
             IRefreshTokenService refreshTokenService,
             IJwtService jwtService)
         {
@@ -122,6 +115,69 @@ namespace HotelBooking.Infrastructure.Identity
         {
             var user = await _userManager.FindByEmailAsync(email);
             return user is not null;
+        }
+
+        public async Task<Result<TokenResponseDTO>> GoogleLoginAsync(string email, string name, string providerKey)
+        {
+            const string provider = "Google";
+
+            var user = await _userManager.FindByLoginAsync(provider, providerKey);
+
+            if (user is null)
+            {
+                user = await _userManager.FindByEmailAsync(email);
+            }
+
+            if (user is null)
+            {
+                user = new ApplicationUser
+                {
+                    Email = email,
+                    UserName = email,
+                    EmailConfirmed = true
+                };
+
+                var identityResult = await _userManager.CreateAsync(user);
+
+                if (!identityResult.Succeeded)
+                    return identityResult.Errors
+                        .Select(e => Error.Validation(e.Code, e.Description))
+                        .ToList();
+
+                var roleResult = await _userManager.AddToRoleAsync(user, Role.Guest.ToString());
+
+                if (!roleResult.Succeeded)
+                {
+                    await _userManager.DeleteAsync(user);
+                    return Error.Failure(
+                        "RoleAssignmentFailed",
+                        "User Created But Role Assignment Failed");
+                }
+            }
+
+            var existingLogins = await _userManager.GetLoginsAsync(user);
+            if (!existingLogins.Any(login =>
+                    login.LoginProvider == provider &&
+                    login.ProviderKey == providerKey))
+            {
+                var loginResult = await _userManager.AddLoginAsync(
+                    user,
+                    new UserLoginInfo(provider, providerKey, name));
+
+                if (!loginResult.Succeeded)
+                    return loginResult.Errors
+                        .Select(e => Error.Validation(e.Code, e.Description))
+                        .ToList();
+            }
+
+            var accessToken = await _jwtService.GenerateTokenAsync(user);
+            var refreshToken = await _refreshTokenService.GenerateRefreshTokenAsync(user.Id);
+
+            return new TokenResponseDTO
+            {
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
+            };
         }
     }
 }

@@ -1,10 +1,3 @@
-﻿using HotelBooking.Application.DTOs.CancellationDTOs;
-using HotelBooking.Application.Features.Cancellations.Commands.Requests;
-using HotelBooking.Application.Features.Cancellations.Queries.Requests;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 namespace HotelBooking.Presentation.Controllers
 {
     [Authorize(Roles = "Admin,Manager,Guest")]

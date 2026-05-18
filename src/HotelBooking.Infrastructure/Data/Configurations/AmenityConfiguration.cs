@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Rooms;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace HotelBooking.Infrastructure.Data.Configurations
 {
     internal class AmenityConfiguration : IEntityTypeConfiguration<Amenity>

@@ -1,13 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.RoomDTOs;
-using HotelBooking.Application.Features.Rooms.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.RoomSpecifications;
-using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Rooms;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Rooms.Queries.Handlers
 {
     public class GetAllRoomsQueryHandler : IRequestHandler<GetAllRoomsQuery, Result<PaginatedResultDTO<RoomDTO>>>

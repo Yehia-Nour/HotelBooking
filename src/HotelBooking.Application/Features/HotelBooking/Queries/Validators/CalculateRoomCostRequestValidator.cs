@@ -1,6 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.HotelBooking.Queries.Requests;
-
 namespace HotelBooking.Application.Features.HotelBooking.Queries.Validators
 {
     public class CalculateRoomCostRequestValidator : AbstractValidator<CalculateRoomCostRequest>

@@ -1,12 +1,3 @@
-﻿using HotelBooking.Application.Features.HotelBooking.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.HotelBookingSpecifications;
-using HotelBooking.Domain.Entities.Payments;
-using HotelBooking.Domain.Entities.Reservations;
-using HotelBooking.Domain.Entities.Rooms;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Payments.Commands.Handlers
 {
     public class ProcessPaymentCommandHandler : IRequestHandler<ProcessPaymentWithUserCommand, Result<int>>

@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Guests;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace HotelBooking.Infrastructure.Data.Configurations
 {
     internal class GuestConfiguration : IEntityTypeConfiguration<Guest>

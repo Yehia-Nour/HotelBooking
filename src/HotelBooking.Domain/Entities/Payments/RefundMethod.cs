@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-
 namespace HotelBooking.Domain.Entities.Payments
 {
     public class RefundMethod : BaseEntity

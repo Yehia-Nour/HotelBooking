@@ -1,6 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.Amenities.Commands.Requests;
-
 namespace HotelBooking.Application.Features.Amenities.Commands.Validators
 {
     public class CreateAmenitiesValidator : AbstractValidator<CreateAmenitiesCommand>

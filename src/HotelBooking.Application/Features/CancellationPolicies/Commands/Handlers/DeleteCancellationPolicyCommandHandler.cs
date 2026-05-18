@@ -1,9 +1,3 @@
-﻿using HotelBooking.Application.Features.CancellationPolicies.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.CancellationPolicies.Commands.Handlers
 {
     public class DeleteCancellationPolicyCommandHandler : IRequestHandler<DeleteCancellationPolicyCommand, Result>

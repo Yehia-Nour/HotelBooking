@@ -1,8 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.RoomTypeDTOs;
-using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
-using HotelBooking.Domain.Entities.Rooms;
-
 namespace HotelBooking.Application.MappingProfiles
 {
     internal class RoomTypeProfile : Profile

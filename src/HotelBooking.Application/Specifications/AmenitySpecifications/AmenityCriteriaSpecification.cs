@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Rooms;
-using System.Linq.Expressions;
-
 namespace HotelBooking.Application.Specifications.AmenitySpecifications
 {
     internal class AmenityCriteriaSpecification : ICriteriaSpecification<Amenity>

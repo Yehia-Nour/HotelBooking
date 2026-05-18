@@ -1,7 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.States.Commands.Requests;
-using HotelBooking.Application.Validators;
-
 namespace HotelBooking.Application.Features.States.Commands.Validators
 {
     internal class UpdateStateValidator : AbstractValidator<UpdateStateCommand>

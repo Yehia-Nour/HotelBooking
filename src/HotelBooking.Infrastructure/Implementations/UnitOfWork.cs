@@ -1,9 +1,3 @@
-﻿using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Interfaces.Repositories;
-using HotelBooking.Domain.Entities.Common;
-using HotelBooking.Infrastructure.Data.DbContexts;
-using HotelBooking.Infrastructure.Implementations.Repositories;
-
 namespace HotelBooking.Infrastructure.Implementations
 {
     internal class UnitOfWork : IUnitOfWork

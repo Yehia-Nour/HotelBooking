@@ -1,7 +1,3 @@
-﻿using HotelBooking.Application.Features.Rooms.Queries.Requests;
-using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Rooms;
-
 namespace HotelBooking.Application.Specifications.RoomSpecifications
 {
     internal class RoomPaginationSpecification : IPaginateSpecification<Room>

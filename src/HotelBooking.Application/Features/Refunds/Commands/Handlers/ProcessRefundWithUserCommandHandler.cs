@@ -1,12 +1,3 @@
-﻿using HotelBooking.Application.Features.Refunds.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.CancellationSpecifications;
-using HotelBooking.Application.Specifications.HotelBookingSpecifications;
-using HotelBooking.Domain.Entities.Payments;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Refunds.Commands.Handlers
 {
     public class ProcessRefundWithUserCommandHandler : IRequestHandler<ProcessRefundWithUserCommand, Result<int>>

@@ -1,6 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.Features.Refunds.Commands.Requests;
-
 namespace HotelBooking.Application.Features.Refunds.Commands.Validators
 {
     public class ProcessRefundCommandValidator : AbstractValidator<ProcessRefundCommand>

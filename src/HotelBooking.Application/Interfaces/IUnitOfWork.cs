@@ -1,6 +1,3 @@
-﻿using HotelBooking.Application.Interfaces.Repositories;
-using HotelBooking.Domain.Entities.Common;
-
 namespace HotelBooking.Application.Interfaces
 {
     public interface IUnitOfWork

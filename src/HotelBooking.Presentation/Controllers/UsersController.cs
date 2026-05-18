@@ -1,8 +1,3 @@
-﻿using HotelBooking.Application.DTOs.UserDTOs;
-using HotelBooking.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-
 namespace HotelBooking.Presentation.Controllers
 {
     [Authorize(Roles = "Admin")]

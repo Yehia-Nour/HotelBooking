@@ -1,10 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.Features.CancellationPolicies.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Cancellations.Commands.Handlers
 {
     public class UpdateCancellationPolicyCommandHandler : IRequestHandler<UpdateCancellationPolicyCommand, Result>

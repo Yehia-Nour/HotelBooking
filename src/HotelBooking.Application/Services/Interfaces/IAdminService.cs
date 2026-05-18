@@ -1,6 +1,3 @@
-﻿using HotelBooking.Application.DTOs.UserDTOs;
-using HotelBooking.Application.Results;
-
 namespace HotelBooking.Application.Services.Interfaces
 {
     public interface IAdminService

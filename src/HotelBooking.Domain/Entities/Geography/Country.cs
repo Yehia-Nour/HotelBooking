@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Common;
-
 namespace HotelBooking.Domain.Entities.Geography
 {
     public class Country : AuditableEntity

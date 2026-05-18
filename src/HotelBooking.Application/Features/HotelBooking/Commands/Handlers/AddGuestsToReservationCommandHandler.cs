@@ -1,13 +1,3 @@
-﻿using HotelBooking.Application.Features.HotelBooking.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.GeographySpecifications;
-using HotelBooking.Application.Specifications.HotelBookingSpecifications;
-using HotelBooking.Domain.Entities.Geography;
-using HotelBooking.Domain.Entities.Guests;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.HotelBooking.Commands.Handlers
 {
     public class AddGuestsToReservationCommandHandler : IRequestHandler<AddGuestsToReservationWithUserCommand, Result>

@@ -1,12 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.HotelSearchDTOs;
-using HotelBooking.Application.Features.HotelSearch.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.HotelSearchSpecifications;
-using HotelBooking.Domain.Entities.Rooms;
-using MediatR;
-
 namespace HotelBooking.Application.Features.HotelSearch.Queries.Handlers
 {
     public class SearchRoomsByMinRatingQueryHandler : IRequestHandler<SearchRoomsByMinRatingQuery, Result<IEnumerable<RoomSearchDTO>>>

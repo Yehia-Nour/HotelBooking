@@ -1,12 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.CancellationDTOs;
-using HotelBooking.Application.Features.Cancellations.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.CancellationSpecifications;
-using HotelBooking.Domain.Entities.Reservations;
-using MediatR;
-
 namespace HotelBooking.Application.Features.Cancellations.Queries.Handlers
 {
     public class GetActiveCancellationPoliciesQueryHandler : IRequestHandler<GetActiveCancellationPoliciesQuery, Result<IEnumerable<CancellationPolicyDTO>>>

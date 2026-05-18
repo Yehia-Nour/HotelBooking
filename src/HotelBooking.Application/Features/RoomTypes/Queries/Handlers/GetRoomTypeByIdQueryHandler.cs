@@ -1,11 +1,3 @@
-﻿using AutoMapper;
-using HotelBooking.Application.DTOs.RoomTypeDTOs;
-using HotelBooking.Application.Features.RoomTypes.Queries.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Domain.Entities.Rooms;
-using MediatR;
-
 namespace HotelBooking.Application.Features.RoomTypes.Queries.Handlers
 {
     public class GetRoomTypeByIdQueryHandler : IRequestHandler<GetRoomTypeByIdQuery, Result<RoomTypeDTO>>

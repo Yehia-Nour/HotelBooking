@@ -1,10 +1,3 @@
-﻿using HotelBooking.Application.Features.RoomTypes.Commands.Requests;
-using HotelBooking.Application.Interfaces;
-using HotelBooking.Application.Results;
-using HotelBooking.Application.Specifications.RoomSpecifications;
-using HotelBooking.Domain.Entities.Rooms;
-using MediatR;
-
 namespace HotelBooking.Application.Features.RoomTypes.Commands.Handlers
 {
     public class DeleteRoomTypeCommandHandler : IRequestHandler<DeleteRoomTypeCommand, Result>

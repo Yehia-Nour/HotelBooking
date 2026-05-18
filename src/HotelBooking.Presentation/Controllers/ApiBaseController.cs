@@ -1,8 +1,3 @@
-﻿using HotelBooking.Application.Results;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System.Security.Claims;
-
 namespace HotelBooking.Presentation.Controllers
 {
     [Route("api/[controller]")]

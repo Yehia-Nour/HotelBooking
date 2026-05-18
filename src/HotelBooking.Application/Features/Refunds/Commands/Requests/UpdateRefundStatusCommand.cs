@@ -1,5 +1,3 @@
-﻿using HotelBooking.Domain.Entities.Payments;
-
 namespace HotelBooking.Application.Features.Refunds.Commands.Requests
 {
     public class UpdateRefundStatusCommand

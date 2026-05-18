@@ -1,12 +1,3 @@
-﻿using FluentValidation.AspNetCore;
-using HotelBooking.Presentation.Factories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text;
-using System.Text.Json.Serialization;
-
 namespace HotelBooking.Presentation.DependencyInjection
 {
     public static class DependencyInjection
@@ -47,11 +38,16 @@ namespace HotelBooking.Presentation.DependencyInjection
                 });
             });
 
-            services.AddAuthentication(option =>
+
+            services.AddFluentValidationAutoValidation();
+
+            services.AddAuthentication(options =>
             {
-                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
             {
                 options.SaveToken = true;
 
@@ -62,11 +58,17 @@ namespace HotelBooking.Presentation.DependencyInjection
                     ValidateLifetime = true,
                     ValidIssuer = configuration["JwtSettings:Issuer"],
                     ValidAudience = configuration["JwtSettings:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]!))
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]!))
                 };
+            })
+            .AddCookie()
+            .AddGoogle(options =>
+            {
+                options.ClientId = configuration["Authentication:Google:ClientId"]!;
+                options.ClientSecret = configuration["Authentication:Google:ClientSecret"]!;
+                options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             });
-
-            services.AddFluentValidationAutoValidation();
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

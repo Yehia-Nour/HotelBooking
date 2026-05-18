@@ -1,6 +1,3 @@
-﻿using FluentValidation;
-using HotelBooking.Application.DTOs.UserDTOs;
-
 namespace HotelBooking.Application.Validators.UserValidators
 {
     public class AddUserValidator : AbstractValidator<CreateUserDTO>

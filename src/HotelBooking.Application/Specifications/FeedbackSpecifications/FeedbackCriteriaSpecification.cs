@@ -1,7 +1,3 @@
-﻿using HotelBooking.Domain.Contracts.Specifications;
-using HotelBooking.Domain.Entities.Reservations;
-using System.Linq.Expressions;
-
 namespace HotelBooking.Application.Specifications.FeedbackSpecifications
 {
     public class FeedbackCriteriaSpecification : ICriteriaSpecification<Feedback>

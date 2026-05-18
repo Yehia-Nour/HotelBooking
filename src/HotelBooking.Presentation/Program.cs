@@ -1,10 +1,3 @@
-
-using HotelBooking.Application.DependencyInjection;
-using HotelBooking.Infrastructure.DependencyInjection;
-using HotelBooking.Presentation.CustomMiddlewares;
-using HotelBooking.Presentation.DependencyInjection;
-using HotelBooking.Presentation.Extensions;
-
 namespace HotelBooking.API
 {
     public class Program
