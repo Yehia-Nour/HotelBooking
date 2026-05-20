@@ -2,12 +2,12 @@ namespace HotelBooking.Infrastructure.Identity.Security
 {
     internal class JwtService : IJwtService
     {
-        private readonly JwtSettings _settings;
+        private readonly JwtOptions _options;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public JwtService(UserManager<ApplicationUser> userManager, IOptions<JwtSettings> options)
+        public JwtService(UserManager<ApplicationUser> userManager, IOptions<JwtOptions> options)
         {
-            _settings = options.Value;
+            _options = options.Value;
             _userManager = userManager;
         }
 
@@ -24,14 +24,14 @@ namespace HotelBooking.Infrastructure.Identity.Security
             foreach (var role in roles)
                 claims.Add(new(ClaimTypes.Role, role));
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.SecretKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.SecretKey));
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: _settings.Issuer,
-                audience: _settings.Audience,
-                expires: DateTime.UtcNow.AddMinutes(_settings.ExpiryInMinutes),
+                issuer: _options.Issuer,
+                audience: _options.Audience,
+                expires: DateTime.UtcNow.AddMinutes(_options.ExpiryInMinutes),
                 claims: claims,
                 signingCredentials: cred
             );
