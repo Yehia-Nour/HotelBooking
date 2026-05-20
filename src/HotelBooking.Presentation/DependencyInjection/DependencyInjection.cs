@@ -5,6 +5,34 @@ namespace HotelBooking.Presentation.DependencyInjection
         public static IServiceCollection AddPresentationServices(this IServiceCollection services,
             IConfiguration configuration)
         {
+            services.AddOptions<JwtOptions>()
+                .BindConfiguration(JwtOptions.SectionName)
+                .Validate(options => !string.IsNullOrWhiteSpace(options.Issuer),
+                    "JWT issuer is required.")
+                .Validate(options => !string.IsNullOrWhiteSpace(options.Audience),
+                    "JWT audience is required.")
+                .Validate(options => !string.IsNullOrWhiteSpace(options.SecretKey),
+                    "JWT secret key is required.")
+                .Validate(options => options.ExpiryInMinutes > 0,
+                    "JWT expiry must be greater than zero.")
+                .ValidateOnStart();
+
+            services.AddOptions<GoogleAuthOptions>()
+                .BindConfiguration(GoogleAuthOptions.SectionName)
+                .Validate(options => !string.IsNullOrWhiteSpace(options.ClientId),
+                    "Google authentication client id is required.")
+                .Validate(options => !string.IsNullOrWhiteSpace(options.ClientSecret),
+                    "Google authentication client secret is required.")
+                .ValidateOnStart();
+
+            var jwtOptions = configuration
+                .GetRequiredSection(JwtOptions.SectionName)
+                .Get<JwtOptions>()!;
+
+            var googleAuthOptions = configuration
+                .GetRequiredSection(GoogleAuthOptions.SectionName)
+                .Get<GoogleAuthOptions>()!;
+
             services.AddControllers().AddJsonOptions(options =>
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             services.AddEndpointsApiExplorer();
@@ -56,17 +84,17 @@ namespace HotelBooking.Presentation.DependencyInjection
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
-                    ValidIssuer = configuration["JwtSettings:Issuer"],
-                    ValidAudience = configuration["JwtSettings:Audience"],
+                    ValidIssuer = jwtOptions.Issuer,
+                    ValidAudience = jwtOptions.Audience,
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]!))
+                        Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
                 };
             })
             .AddCookie()
             .AddGoogle(options =>
             {
-                options.ClientId = configuration["Authentication:Google:ClientId"]!;
-                options.ClientSecret = configuration["Authentication:Google:ClientSecret"]!;
+                options.ClientId = googleAuthOptions.ClientId;
+                options.ClientSecret = googleAuthOptions.ClientSecret;
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             });
 

@@ -39,6 +39,7 @@ global using HotelBooking.Application.Results;
 global using HotelBooking.Application.Services.Interfaces;
 global using HotelBooking.Infrastructure.Data.DbContexts;
 global using HotelBooking.Infrastructure.DependencyInjection;
+global using HotelBooking.Infrastructure.Options;
 global using HotelBooking.Presentation.CustomMiddlewares;
 global using HotelBooking.Presentation.DependencyInjection;
 global using HotelBooking.Presentation.Extensions;
