@@ -1,3 +1,5 @@
+using HotelBooking.Presentation.Hubs;
+
 namespace HotelBooking.API
 {
     public class Program
@@ -37,6 +39,7 @@ namespace HotelBooking.API
             app.UseAuthorization();
 
             app.MapControllers();
+            app.MapHub<ReservationHub>("/hubs/reservation");
 
             app.Run();
         }

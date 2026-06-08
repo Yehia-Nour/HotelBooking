@@ -103,6 +103,9 @@ namespace HotelBooking.Presentation.DependencyInjection
                 options.InvalidModelStateResponseFactory = ApiResponseFactory.GenerateApiValidationResponse;
             });
 
+            services.AddSignalR();
+            services.AddScoped<HotelBooking.Application.Services.Interfaces.IReservationNotificationService, HotelBooking.Presentation.Services.ReservationNotificationService>();
+
             return services;
         }
     }

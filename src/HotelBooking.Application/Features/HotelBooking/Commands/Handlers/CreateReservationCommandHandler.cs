@@ -1,10 +1,17 @@
+using HotelBooking.Application.Services.Interfaces;
+
 namespace HotelBooking.Application.Features.HotelBooking.Commands.Handlers
 {
     public class CreateReservationCommandHandler : IRequestHandler<CreateReservationWithUserCommand, Result<int>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IReservationNotificationService _notificationService;
 
-        public CreateReservationCommandHandler(IUnitOfWork unitOfWork) { _unitOfWork = unitOfWork; }
+        public CreateReservationCommandHandler(IUnitOfWork unitOfWork, IReservationNotificationService notificationService)
+        {
+            _unitOfWork = unitOfWork;
+            _notificationService = notificationService;
+        }
 
         public async Task<Result<int>> Handle(CreateReservationWithUserCommand request, CancellationToken cancellationToken)
         {
@@ -81,6 +88,8 @@ namespace HotelBooking.Application.Features.HotelBooking.Commands.Handlers
             }
 
             await _unitOfWork.SaveChangesAsync();
+
+            await _notificationService.NotifyRoomReservedAsync(reservation.Id, availableRooms.Select(r => r.Id).ToList(), "A new reservation has been made.", cancellationToken);
 
             return reservation.Id;
         }
